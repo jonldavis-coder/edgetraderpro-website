@@ -1,0 +1,16 @@
+{
+  "name": "Edge Trader Pro",
+  "short_name": "Edge Trader Pro",
+  "start_url": "./",
+  "display": "browser",
+  "background_color": "#07142e",
+  "theme_color": "#07142e",
+  "icons": [
+    {
+      "src": "assets/img/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    }
+  ]
+}
