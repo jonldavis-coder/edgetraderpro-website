@@ -241,7 +241,7 @@ function layout(page) {
   <meta property="og:description" content="${page.description}">
   <meta property="og:url" content="${url}">
   <meta property="og:image" content="${BASE}/assets/img/og.png">
-  <meta property="og:image:alt" content="EdgeDashPro mark on navy, with the tagline Your rules. Your data. Your desk.">
+  <meta property="og:image:alt" content="EdgeDashPro wordmark on navy, with the tagline Your rules. Your data. Your desk.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${page.title}">
   <meta name="twitter:description" content="${page.description}">
@@ -257,7 +257,6 @@ function layout(page) {
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="${href(page.file, "")}">
-        <img src="${pre}assets/img/mark.svg" alt="" width="132" height="48">
         <span class="brand-name">EdgeDashPro</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
@@ -327,7 +326,6 @@ pages.push({
     "EdgeDashPro: free public pages at $0 with no login, a 7-day Squawk trial on a free account, and paid at $29.99 a month or $259 a year with no free trial of the subscription. Not investment advice.",
   body: `<div class="wrap">
     <section class="hero">
-      <img class="hero-logo" src="assets/img/logo.svg" alt="EdgeDashPro monogram: a lowercase e beside uppercase D and P, cut by a blue diagonal slash.">
       <h1>EdgeDashPro</h1>
       <p class="tagline">Your rules. Your data. Your desk.</p>
       <p class="lede">Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research are free, ad-supported, and read-only, with no login. Those views stay on locked presets: $1–$50, float under 40M, and Price Spike Up or Price Spike Down at 5% on Signals. A free account unlocks browser-based Squawk for the first 7 days. Paid unlocks the interactive filter controls, saved filter presets, the journal, and ad-free Squawk. The paid subscription has no free trial.</p>
@@ -336,7 +334,7 @@ pages.push({
         <a class="btn btn-ghost" href="features/">See what is on the desk</a>
       </div>
       <p class="fine">Public pages $0, no login. Squawk needs a free account and lasts 7 days. Paid $29.99/month or $259/year. 25-user launch. No free trial of the subscription.</p>
-      <p class="mark-note">The eDP monogram is the brand mark. This site does not publish performance.</p>
+      <p class="mark-note">This site does not publish performance.</p>
     </section>
     <section class="section" aria-labelledby="tiers-heading">
       <p class="kicker">Launch</p>
@@ -847,7 +845,7 @@ pages.push({
     <h2>Your messages</h2>
     <p>Do not send account numbers, passwords, or API keys. We may keep an email you send so we can reply.</p>
     <h2>The mark and the text</h2>
-    <p>The EdgeDashPro name, the eDP monogram, and the text of this website belong to their owner. You may link to a page. You may not copy the site and present it as your own.</p>
+    <p>The EdgeDashPro name, the wordmark, and the text of this website belong to their owner. You may link to a page. You may not copy the site and present it as your own.</p>
     <h2>Contact</h2>
     <p>Questions about these draft terms: <a href="mailto:hello@edgedashpro.com">hello@edgedashpro.com</a>.</p>
   </div>`

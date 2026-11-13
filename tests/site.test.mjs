@@ -259,6 +259,9 @@ test("published copy uses EdgeDashPro and hello@edgedashpro.com", () => {
   const home = readFileSync(join(ROOT, "index.html"), "utf8");
   assert.match(home, /EdgeDashPro/);
   assert.match(home, /hello@edgedashpro\.com/);
-  assert.match(home, /eDP monogram/);
-  assert.doesNotMatch(home, /candlestick/i);
+  assert.match(home, /This site does not publish performance/);
+  assert.doesNotMatch(home, /eDP|monogram|mark\.svg|hero-logo/i);
+  const favicon = readFileSync(join(ROOT, "assets/img/favicon.svg"), "utf8");
+  assert.match(favicon, /aria-label="EDP"/);
+  assert.doesNotMatch(favicon, /monogram/i);
 });

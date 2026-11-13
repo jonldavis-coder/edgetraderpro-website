@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Draw the EdgeDashPro eDP monogram.
+"""EdgeDashPro marks.
 
-A smaller lowercase e sits beside larger uppercase D and P. A blue slash
-cuts the D/P junction from bottom-left to top-right. logo.svg and mark.svg
-are white on transparent. favicon.svg and the PNG marks sit on dark navy.
+logo.svg is the EdgeDashPro wordmark, white on transparent.
+favicon.svg, mark.svg, and apple-touch-icon.png are a square EDP
+icon: bold uppercase letters cut by a rising blue trend line.
+og.png is the wordmark and tagline on navy, with no icon.
 """
 
 from pathlib import Path
@@ -11,19 +12,12 @@ from pathlib import Path
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.pens.transformPen import TransformPen
 from fontTools.ttLib import TTFont
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 FONT_PATH = ROOT / "assets" / "fonts" / "Inter-SemiBold.ttf"
 ITALIC_PATH = ROOT / "assets" / "fonts" / "LiberationSerif-Italic.ttf"
 OUT = ROOT / "assets" / "img"
-
-NAVY = (7, 20, 46, 255)
-INK = (5, 9, 20, 255)
-WHITE = (255, 255, 255, 255)
-CORE = (244, 251, 255, 255)
-CYAN = (56, 189, 248, 255)
-BLUE = (37, 99, 235, 255)
 
 
 def load_font():
@@ -39,170 +33,194 @@ def glyph_path(font_set, cmap, upem, ch, size, x, baseline):
     return pen.getCommands(), glyph.width * scale
 
 
-def layout(font_set, cmap, upem):
-    e_size = 148
-    dp_size = 210
-    _, e_adv = glyph_path(font_set, cmap, upem, "e", e_size, 0, 0)
-    _, d_adv = glyph_path(font_set, cmap, upem, "D", dp_size, 0, 0)
-    _, p_adv = glyph_path(font_set, cmap, upem, "P", dp_size, 0, 0)
-    gap_e = 6
-    gap_dp = 8
-    pad_x = 28
-    pad_y = 36
-    baseline = pad_y + dp_size * 0.80
-    e_x = pad_x
-    d_x = e_x + e_adv + gap_e
-    p_x = d_x + d_adv + gap_dp
-    width = p_x + p_adv + pad_x
-    height = baseline + dp_size * 0.22 + pad_y
-    e_cmd, _ = glyph_path(font_set, cmap, upem, "e", e_size, e_x, baseline)
-    d_cmd, _ = glyph_path(font_set, cmap, upem, "D", dp_size, d_x, baseline)
-    p_cmd, _ = glyph_path(font_set, cmap, upem, "P", dp_size, p_x, baseline)
-    junction = d_x + d_adv + gap_dp / 2
-    cap_top = baseline - dp_size * 0.72
-    x1, y1 = junction - 22, baseline - 8
-    x2, y2 = junction + 22, cap_top + 6
-    return {
-        "e": e_cmd,
-        "d": d_cmd,
-        "p": p_cmd,
-        "width": width,
-        "height": height,
-        "slash": (x1, y1, x2, y2),
-        "e_size": e_size,
-        "dp_size": dp_size,
-        "baseline": baseline,
-        "e_x": e_x,
-        "d_x": d_x,
-        "p_x": p_x,
-    }
+def text_run(font_set, cmap, upem, text, size, x, baseline, tracking=0):
+    parts = []
+    cursor = x
+    for ch in text:
+        cmd, adv = glyph_path(font_set, cmap, upem, ch, size, cursor, baseline)
+        if cmd:
+            parts.append(cmd)
+        cursor += adv + tracking
+    return " ".join(parts), cursor - x
 
 
-def slash_markup(x1, y1, x2, y2, filter_id="glow", mask_id="cut"):
-    return f'''<defs>
-    <filter id="{filter_id}" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
-      <feGaussianBlur stdDeviation="4.5" result="blur"/>
+def wordmark_svg():
+    font_set, cmap, upem = load_font()
+    size = 86
+    path, width = text_run(font_set, cmap, upem, "EdgeDashPro", size, 0, size * 0.8, tracking=-1.5)
+    height = size * 1.05
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width:.1f} {height:.1f}" '
+        f'role="img" aria-label="EdgeDashPro">\n'
+        f'  <path fill="#ffffff" d="{path}"/>\n'
+        f"</svg>\n"
+    )
+
+
+def icon_layout():
+    font_set, cmap, upem = load_font()
+    size = 210
+    path, width = text_run(font_set, cmap, upem, "EDP", size, 0, 0, tracking=-8)
+    pad_x = 36
+    pad_y = 48
+    baseline = pad_y + size * 0.78
+    path, width = text_run(font_set, cmap, upem, "EDP", size, pad_x, baseline, tracking=-8)
+    box_w = width + pad_x
+    box_h = baseline + size * 0.24
+    # Rising zig-zag from the lower left of E to the upper right of P.
+    x0 = pad_x + width * 0.06
+    x1 = pad_x + width * 0.34
+    x2 = pad_x + width * 0.46
+    x3 = pad_x + width * 0.68
+    x4 = pad_x + width * 0.80
+    x5 = pad_x + width * 0.98
+    y_base = baseline - size * 0.08
+    points = [
+        (x0, y_base),
+        (x1, y_base - size * 0.22),
+        (x2, y_base - size * 0.12),
+        (x3, y_base - size * 0.40),
+        (x4, y_base - size * 0.28),
+        (x5, y_base - size * 0.58),
+    ]
+    return path, box_w, box_h, points
+
+
+def points_attr(points):
+    return " ".join(f"{x:.2f},{y:.2f}" for x, y in points)
+
+
+def icon_svg(rounded=True):
+    path, width, height, points = icon_layout()
+    poly = points_attr(points)
+    tip_x, tip_y = points[-1]
+    prev_x, prev_y = points[-2]
+    # Small arrow head continuing the last rising segment.
+    arrow = (
+        f'<polygon points="{tip_x:.2f},{tip_y:.2f} '
+        f'{tip_x - 16:.2f},{tip_y + 4:.2f} {tip_x - 6:.2f},{tip_y + 16:.2f}" fill="#f4fbff"/>'
+    )
+    plate = (
+        f'<rect width="100%" height="100%" rx="18" fill="#050914"/>'
+        if rounded
+        else ""
+    )
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width:.1f} {height:.1f}" role="img" aria-label="EDP">
+  <defs>
+    <filter id="trend-glow" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="3.2" result="blur"/>
       <feMerge>
         <feMergeNode in="blur"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
-    <mask id="{mask_id}">
+    <mask id="trend-cut">
       <rect width="100%" height="100%" fill="#ffffff"/>
-      <line x1="{x1:.2f}" y1="{y1:.2f}" x2="{x2:.2f}" y2="{y2:.2f}" stroke="#000000" stroke-width="18" stroke-linecap="square"/>
+      <polyline points="{poly}" fill="none" stroke="#000000" stroke-width="16" stroke-linejoin="round" stroke-linecap="round"/>
     </mask>
   </defs>
-  <g mask="url(#{mask_id})">
-    <path fill="#ffffff" d="{{letters}}"/>
+  {plate}
+  <g mask="url(#trend-cut)">
+    <path fill="#ffffff" d="{path}"/>
   </g>
-  <g filter="url(#{filter_id})" stroke-linecap="square">
-    <line x1="{x1:.2f}" y1="{y1:.2f}" x2="{x2:.2f}" y2="{y2:.2f}" stroke="#2563eb" stroke-width="16" opacity="0.95"/>
-    <line x1="{x1:.2f}" y1="{y1:.2f}" x2="{x2:.2f}" y2="{y2:.2f}" stroke="#38bdf8" stroke-width="7"/>
-    <line x1="{x1:.2f}" y1="{y1:.2f}" x2="{x2:.2f}" y2="{y2:.2f}" stroke="#f4fbff" stroke-width="2.4"/>
-  </g>'''
-
-
-def monogram_svg(box):
-    x1, y1, x2, y2 = box["slash"]
-    letters = f'{box["e"]} {box["d"]} {box["p"]}'
-    body = slash_markup(x1, y1, x2, y2).replace("{letters}", letters)
-    return (
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {box["width"]:.1f} {box["height"]:.1f}" '
-        f'role="img" aria-label="EdgeDashPro eDP monogram">\n{body}\n</svg>\n'
-    )
-
-
-def favicon_svg(box):
-    x1, y1, x2, y2 = box["slash"]
-    letters = f'{box["e"]} {box["d"]} {box["p"]}'
-    inner = slash_markup(x1, y1, x2, y2, "glow-f", "cut-f").replace("{letters}", letters)
-    scale = 52 / box["width"]
-    tx = (64 - box["width"] * scale) / 2
-    ty = (64 - box["height"] * scale) / 2
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="EdgeDashPro">
-  <rect width="64" height="64" rx="14" fill="#050914"/>
-  <g transform="translate({tx:.2f} {ty:.2f}) scale({scale:.4f})">
-{inner}
+  <g filter="url(#trend-glow)" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <polyline points="{poly}" stroke="#2563eb" stroke-width="14" opacity="0.95"/>
+    <polyline points="{poly}" stroke="#38bdf8" stroke-width="6"/>
+    <polyline points="{poly}" stroke="#f4fbff" stroke-width="2.2"/>
   </g>
+  {arrow}
 </svg>
 '''
 
 
-def raster_monogram(scale=4):
-    font_set, cmap, upem = load_font()
-    box = layout(font_set, cmap, upem)
-    w = int(box["width"] * scale)
-    h = int(box["height"] * scale)
-    img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-    draw = ImageDraw.Draw(img)
-    font_e = ImageFont.truetype(str(FONT_PATH), int(box["e_size"] * scale))
-    font_dp = ImageFont.truetype(str(FONT_PATH), int(box["dp_size"] * scale))
-    # Pillow's text y is the top of the em box, not the baseline. Offset by ascent.
-    ascent_e = font_e.getmetrics()[0]
-    ascent_dp = font_dp.getmetrics()[0]
-    base = box["baseline"] * scale
-    draw.text((box["e_x"] * scale, base - ascent_e), "e", font=font_e, fill=WHITE)
-    draw.text((box["d_x"] * scale, base - ascent_dp), "D", font=font_dp, fill=WHITE)
-    draw.text((box["p_x"] * scale, base - ascent_dp), "P", font=font_dp, fill=WHITE)
-    x1, y1, x2, y2 = [v * scale for v in box["slash"]]
-    gap = Image.new("L", img.size, 0)
-    ImageDraw.Draw(gap).line((x1, y1, x2, y2), fill=255, width=int(18 * scale))
-    alpha = img.getchannel("A")
-    alpha.paste(0, mask=gap)
-    img.putalpha(alpha)
-    glow = Image.new("RGBA", img.size, (0, 0, 0, 0))
-    gdraw = ImageDraw.Draw(glow)
-    gdraw.line((x1, y1, x2, y2), fill=BLUE, width=int(18 * scale))
-    glow = glow.filter(ImageFilter.GaussianBlur(radius=8 * scale / 2))
-    img = Image.alpha_composite(img, glow)
-    core = Image.new("RGBA", img.size, (0, 0, 0, 0))
-    cdraw = ImageDraw.Draw(core)
-    cdraw.line((x1, y1, x2, y2), fill=BLUE, width=int(14 * scale))
-    cdraw.line((x1, y1, x2, y2), fill=CYAN, width=int(6 * scale))
-    cdraw.line((x1, y1, x2, y2), fill=CORE, width=max(2, int(2.2 * scale)))
-    img = Image.alpha_composite(img, core)
-    return img, box
-
-
-def rounded(im, radius):
-    mask = Image.new("L", im.size, 0)
-    ImageDraw.Draw(mask).rounded_rectangle((0, 0, im.size[0], im.size[1]), radius=radius, fill=255)
-    out = im.copy()
-    out.putalpha(mask)
-    return out
-
-
 def build():
     OUT.mkdir(parents=True, exist_ok=True)
-    font_set, cmap, upem = load_font()
-    box = layout(font_set, cmap, upem)
-    mark = monogram_svg(box)
-    (OUT / "logo.svg").write_text(mark)
-    (OUT / "mark.svg").write_text(mark)
-    (OUT / "favicon.svg").write_text(favicon_svg(box))
+    word = wordmark_svg()
+    (OUT / "logo.svg").write_text(word)
+    icon = icon_svg(rounded=True)
+    (OUT / "favicon.svg").write_text(icon)
+    (OUT / "mark.svg").write_text(icon_svg(rounded=False))
 
-    mono, _ = raster_monogram(scale=3)
-    icon = Image.new("RGBA", (180, 180), INK)
-    fitted = mono.copy()
-    fitted.thumbnail((132, 132), Image.Resampling.LANCZOS)
-    icon.alpha_composite(fitted, ((180 - fitted.width) // 2, (180 - fitted.height) // 2))
-    rounded(icon, 36).save(OUT / "apple-touch-icon.png")
+    # Raster icons and the social card from the same type, not the old monogram.
+    font = ImageFont.truetype(str(FONT_PATH), 420)
+    italic = ImageFont.truetype(str(ITALIC_PATH), 36)
+    name_font = ImageFont.truetype(str(FONT_PATH), 78)
 
-    og = Image.new("RGBA", (1200, 630), NAVY)
-    hero = mono.copy()
-    hero.thumbnail((760, 280), Image.Resampling.LANCZOS)
-    og.alpha_composite(hero, ((1200 - hero.width) // 2, 78))
+    def draw_edp(size):
+        canvas = Image.new("RGBA", (size, size), (5, 9, 20, 255))
+        draw = ImageDraw.Draw(canvas)
+        text = "EDP"
+        text_size = int(size * 0.34)
+        face = ImageFont.truetype(str(FONT_PATH), text_size)
+        bbox = draw.textbbox((0, 0), text, font=face)
+        tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
+        tx = (size - tw) / 2 - bbox[0]
+        ty = (size - th) / 2 - bbox[1]
+        draw.text((tx, ty), text, font=face, fill=(255, 255, 255, 255))
+        left = tx + bbox[0]
+        right = tx + bbox[2]
+        top = ty + bbox[1]
+        bottom = ty + bbox[3]
+        span = right - left
+        y0 = bottom - (bottom - top) * 0.18
+        pts = [
+            (left + span * 0.04, y0),
+            (left + span * 0.30, y0 - (bottom - top) * 0.28),
+            (left + span * 0.42, y0 - (bottom - top) * 0.14),
+            (left + span * 0.64, y0 - (bottom - top) * 0.48),
+            (left + span * 0.76, y0 - (bottom - top) * 0.32),
+            (left + span * 0.98, y0 - (bottom - top) * 0.70),
+        ]
+        gap = Image.new("L", canvas.size, 0)
+        ImageDraw.Draw(gap).line(pts, fill=255, width=max(4, size // 28), joint="curve")
+        alpha = canvas.getchannel("A")
+        # Keep the navy plate opaque; only punch the white letters.
+        letters = Image.new("L", canvas.size, 0)
+        ImageDraw.Draw(letters).text((tx, ty), text, font=face, fill=255)
+        cut = Image.new("L", canvas.size, 0)
+        Image.composite(gap, Image.new("L", canvas.size, 0), letters).save  # noqa: keep composite available
+        punched = Image.new("L", canvas.size, 255)
+        # Subtract the trend from the letter coverage, then restore the plate.
+        letter_alpha = letters.copy()
+        letter_alpha.paste(0, mask=gap)
+        alpha.paste(letter_alpha, mask=letters)
+        canvas.putalpha(alpha)
+        glow = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
+        g = ImageDraw.Draw(glow)
+        g.line(pts, fill=(37, 99, 235, 230), width=max(6, size // 22), joint="curve")
+        glow = glow.filter(ImageFilter.GaussianBlur(radius=max(2, size / 40)))
+        canvas = Image.alpha_composite(canvas, glow)
+        core = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
+        c = ImageDraw.Draw(core)
+        c.line(pts, fill=(37, 99, 235, 255), width=max(5, size // 26), joint="curve")
+        c.line(pts, fill=(56, 189, 248, 255), width=max(3, size // 48), joint="curve")
+        c.line(pts, fill=(244, 251, 255, 255), width=max(1, size // 90), joint="curve")
+        tip = pts[-1]
+        c.polygon(
+            [(tip[0], tip[1]), (tip[0] - size * 0.06, tip[1] + size * 0.015), (tip[0] - size * 0.02, tip[1] + size * 0.055)],
+            fill=(244, 251, 255, 255),
+        )
+        canvas = Image.alpha_composite(canvas, core)
+        rounded = Image.new("L", canvas.size, 0)
+        ImageDraw.Draw(rounded).rounded_rectangle((0, 0, size - 1, size - 1), radius=int(size * 0.22), fill=255)
+        alpha = canvas.getchannel("A")
+        canvas.putalpha(ImageChops.multiply(alpha, rounded))
+        return canvas
+
+    draw_edp(180).save(OUT / "apple-touch-icon.png")
+
+    og = Image.new("RGB", (1200, 630), (7, 20, 46))
     draw = ImageDraw.Draw(og)
-    name_font = ImageFont.truetype(str(FONT_PATH), 72)
-    tag_font = ImageFont.truetype(str(ITALIC_PATH), 36)
     name = "EdgeDashPro"
     tag = "Your rules. Your data. Your desk."
     name_w = draw.textlength(name, font=name_font)
-    tag_w = draw.textlength(tag, font=tag_font)
-    draw.text(((1200 - name_w) / 2, 400), name, font=name_font, fill=WHITE)
-    draw.text(((1200 - tag_w) / 2, 492), tag, font=tag_font, fill=(215, 233, 255, 255))
-    og.convert("RGB").save(OUT / "og.png", quality=95)
-    print(f"eDP monogram {box['width']:.0f}x{box['height']:.0f}")
+    tag_w = draw.textlength(tag, font=italic)
+    draw.text(((1200 - name_w) / 2, 250), name, font=name_font, fill=(255, 255, 255))
+    draw.text(((1200 - tag_w) / 2, 360), tag, font=italic, fill=(215, 233, 255))
+    og.save(OUT / "og.png", quality=95)
+    # font is loaded to fail fast if the face is missing.
+    _ = font
+    print("wrote EdgeDashPro wordmark and EDP icon")
 
 
 if __name__ == "__main__":
