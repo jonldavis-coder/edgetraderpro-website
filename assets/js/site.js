@@ -25,11 +25,8 @@
         }
       }
       var note = document.querySelector('[data-checkout-note="' + slot + '"]');
-      if (note) {
-        note.textContent =
-          resolved.via === "stripe"
-            ? "Opens the payment link in a new tab."
-            : "Pricing is not set. This opens an email to hello@edgetraderpro.com.";
+      if (note && resolved.via === "stripe") {
+        note.textContent = "Opens Stripe Checkout in a new tab. There is no free trial.";
       }
     });
   }

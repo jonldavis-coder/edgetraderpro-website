@@ -1,4 +1,5 @@
 /* Stripe Payment Link slots for Edge Trader Pro.
+   Slots: Paid Monthly, Paid Annual, and the waitlist / contact fallback.
    Leave a slot as an empty string and the button falls back to email.
    Do not put secrets, account numbers, or prices in this file. */
 (function (global) {
@@ -8,9 +9,9 @@
       "mailto:hello@edgetraderpro.com?subject=" +
       encodeURIComponent("Edge Trader Pro — request access"),
     stripePaymentLinks: {
-      access: "",
-      waitlist: "",
-      customSetup: ""
+      paidMonthly: "",
+      paidAnnual: "",
+      waitlist: ""
     }
   };
 

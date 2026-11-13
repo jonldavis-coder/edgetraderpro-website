@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
-import { join, relative } from "node:path";
+import { dirname, join, relative } from "node:path";
 import test from "node:test";
 
 const ROOT = join(import.meta.dirname, "..");
@@ -42,10 +42,9 @@ test("published copy skips automation and order-routing claims", () => {
 const required = [
   "index.html",
   "features/index.html",
-  "charts/index.html",
-  "practice/index.html",
+  "market/index.html",
   "journal/index.html",
-  "rules/index.html",
+  "research/index.html",
   "access/index.html",
   "faq/index.html",
   "support/index.html",
@@ -67,6 +66,9 @@ test("required pages and files exist", () => {
     assert.equal(statSync(join(ROOT, file)).isFile(), true, file);
   }
   assert.equal(existsSync(join(ROOT, "CNAME")), false);
+  for (const retired of ["practice", "charts", "rules"]) {
+    assert.equal(existsSync(join(ROOT, retired)), false, retired);
+  }
 });
 
 test("thank-you and checkout-canceled are noindex", () => {
@@ -78,7 +80,7 @@ test("thank-you and checkout-canceled are noindex", () => {
 
 test("each HTML page has title, description, canonical, and Open Graph tags", () => {
   const htmlFiles = files.filter((file) => file.endsWith(".html"));
-  assert.ok(htmlFiles.length >= 16);
+  assert.ok(htmlFiles.length >= 15);
   for (const file of htmlFiles) {
     const html = readFileSync(file, "utf8");
     const rel = relative(ROOT, file);
@@ -97,9 +99,10 @@ test("each HTML page has title, description, canonical, and Open Graph tags", ()
 
 test("Stripe Payment Link slots are empty and fall back to mailto", () => {
   const js = readFileSync(join(ROOT, "assets/js/checkout-config.js"), "utf8");
-  assert.match(js, /access:\s*""/);
+  assert.match(js, /paidMonthly:\s*""/);
+  assert.match(js, /paidAnnual:\s*""/);
   assert.match(js, /waitlist:\s*""/);
-  assert.match(js, /customSetup:\s*""/);
+  assert.doesNotMatch(js, /\$\d/);
   assert.match(js, /mailto:hello@edgetraderpro.com/);
   assert.match(js, /return \{ href: config\.mailto, via: "mailto" \}/);
 });
@@ -114,25 +117,99 @@ test("client scripts do not call the network", () => {
   }
 });
 
-test("journal roadmap is labeled and not mixed into the current list", () => {
+test("journal is the paid account journal", () => {
   const html = readFileSync(join(ROOT, "journal/index.html"), "utf8");
-  assert.match(html, /On the roadmap/);
-  assert.match(html, /Not in the current desk/);
-  assert.match(html, /Broker execution import/);
-  assert.match(html, /Automatic journal capture/);
-  assert.match(html, /MAE\/MFE/);
-  const current = html.split("On the roadmap")[0];
-  assert.doesNotMatch(current, /Broker execution import/);
-  assert.doesNotMatch(current, /journal calendar/i);
+  assert.match(html, /Paid/);
+  assert.match(html, /unified trade journal/);
+  assert.match(html, /P&amp;L calendar/);
+  assert.match(html, /post-trade insight cards/);
+  assert.match(html, /user account/);
+  assert.doesNotMatch(html, /On the roadmap/);
+  assert.doesNotMatch(html, /Broker execution import/);
+  assert.doesNotMatch(html, /MAE\/MFE/);
+  assert.doesNotMatch(html, /\/practice\//);
+});
+
+test("pricing page states both tiers, Stripe slots, and no free trial", () => {
+  const html = readFileSync(join(ROOT, "access/index.html"), "utf8");
+  assert.match(html, /\$0/);
+  assert.match(html, /\$29\.99\/month/);
+  assert.match(html, /\$259\/year/);
+  assert.match(html, /25-user launch/);
+  assert.match(html, /no free trial/i);
+  assert.match(html, /data-checkout="paidMonthly"/);
+  assert.match(html, /data-checkout="paidAnnual"/);
+  assert.match(html, /data-checkout="waitlist"/);
+  assert.match(html, /\$1–\$50 only/);
+  assert.match(html, /float under 40M/);
+  assert.match(html, /server-side/);
+  assert.match(html, /not investment advice/);
+  assert.doesNotMatch(html, /Pricing is not set/);
+});
+
+test("Squawk is a 7-day free-account trial, not a paid-plan trial", () => {
+  for (const file of [
+    "index.html",
+    "features/index.html",
+    "access/index.html",
+    "faq/index.html",
+    "assets/js/assistant-knowledge.js"
+  ]) {
+    const text = readFileSync(join(ROOT, file), "utf8");
+    assert.match(text, /first 7 days/, file);
+    assert.match(text, /free account/, file);
+    assert.match(text, /no free trial/i, file);
+    assert.doesNotMatch(text, /Squawk, with ads/, file);
+    assert.doesNotMatch(text, /and browser-based Squawk\./, file);
+  }
+  const access = readFileSync(join(ROOT, "access/index.html"), "utf8");
+  const freeCard = access.split("Paid monthly")[0];
+  assert.match(freeCard, /no login/i);
+  assert.match(freeCard, /first 7 days/);
+  assert.doesNotMatch(freeCard, /Ad-free Squawk/);
+});
+
+test("launch copy omits removed scope", () => {
+  const pattern =
+    /watchlists?|mosaic|kcurve|schwab|demo mode|earnings|pro\s*trader\s*bot|traderbot|\/practice\/|\/charts\/|\/rules\//i;
+  const hits = [];
+  for (const file of files) {
+    const text = readFileSync(file, "utf8");
+    if (pattern.test(text)) hits.push(relative(ROOT, file));
+  }
+  assert.deepEqual(hits, []);
+});
+
+test("internal links resolve to a file", () => {
+  const htmlFiles = files.filter((file) => file.endsWith(".html"));
+  const missing = [];
+  for (const file of htmlFiles) {
+    const html = readFileSync(file, "utf8");
+    const dir = dirname(file);
+    for (const match of html.matchAll(/href="([^"]+)"/g)) {
+      const href = match[1];
+      if (/^(mailto:|https?:|tel:|#)/.test(href)) continue;
+      const pathPart = href.split("#")[0];
+      if (!pathPart) continue;
+      const resolved = pathPart.endsWith("/")
+        ? join(dir, pathPart, "index.html")
+        : join(dir, pathPart);
+      if (!existsSync(resolved)) missing.push(`${relative(ROOT, file)} -> ${href}`);
+    }
+  }
+  assert.deepEqual(missing, []);
 });
 
 test("sitemap lists public pages and omits noindex utility pages", () => {
   const xml = readFileSync(join(ROOT, "sitemap.xml"), "utf8");
-  for (const path of ["", "features/", "charts/", "practice/", "journal/", "rules/", "access/", "faq/", "support/", "contact/", "privacy/", "terms/", "sitemap/"]) {
-    assert.match(xml, new RegExp("edgetraderpro-website/" + path.replace("/", "\\/") ));
+  for (const path of ["", "features/", "market/", "journal/", "research/", "access/", "faq/", "support/", "contact/", "privacy/", "terms/", "sitemap/"]) {
+    assert.match(xml, new RegExp("edgetraderpro-website/" + path.replace("/", "\\/")));
   }
   assert.doesNotMatch(xml, /thank-you/);
   assert.doesNotMatch(xml, /checkout-canceled/);
+  assert.doesNotMatch(xml, /\/practice\//);
+  assert.doesNotMatch(xml, /\/charts\//);
+  assert.doesNotMatch(xml, /\/rules\//);
   const robots = readFileSync(join(ROOT, "robots.txt"), "utf8");
   assert.match(robots, /Sitemap: https:\/\/jonldavis-coder\.github\.io\/edgetraderpro-website\/sitemap\.xml/);
 });
