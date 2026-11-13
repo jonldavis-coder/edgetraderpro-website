@@ -26,7 +26,10 @@
       }
       var note = document.querySelector('[data-checkout-note="' + slot + '"]');
       if (note && resolved.via === "stripe") {
-        note.textContent = "Opens Stripe Checkout in a new tab. There is no free trial.";
+        note.textContent =
+          "Opens " +
+          resolved.href +
+          " in a new tab. Straight to Stripe Checkout. There is no free trial of the subscription.";
       }
     });
   }
@@ -42,8 +45,8 @@
       var message = String(data.get("message") || "").trim();
       var body = "Name: " + name + "\nEmail: " + email + "\nTopic: " + topic + "\n\n" + message;
       var href =
-        "mailto:hello@edgetraderpro.com?subject=" +
-        encodeURIComponent("Edge Trader Pro — " + (topic || "message")) +
+        "mailto:hello@edgedashpro.com?subject=" +
+        encodeURIComponent("EdgeDashPro — " + (topic || "message")) +
         "&body=" +
         encodeURIComponent(body);
       window.location.href = href;
@@ -103,7 +106,7 @@
     if (!best || bestScore < 4) {
       return {
         answer:
-          "I can only answer from the pages on this website, and I don't see a clear match. Try Features, the Journal, Access, or the FAQ, or email hello@edgetraderpro.com.",
+          "I can only answer from the pages on this website, and I don't see a clear match. Try Features, the Journal, Access, or the FAQ, or email hello@edgedashpro.com.",
         more: { slug: "sitemap/", label: "Site map" }
       };
     }

@@ -65,7 +65,8 @@ test("required pages and files exist", () => {
   for (const file of required) {
     assert.equal(statSync(join(ROOT, file)).isFile(), true, file);
   }
-  assert.equal(existsSync(join(ROOT, "CNAME")), false);
+  const cname = readFileSync(join(ROOT, "CNAME"), "utf8").trim();
+  assert.equal(cname, "edgedashpro.com");
   for (const retired of ["practice", "charts", "rules"]) {
     assert.equal(existsSync(join(ROOT, retired)), false, retired);
   }
@@ -91,20 +92,25 @@ test("each HTML page has title, description, canonical, and Open Graph tags", ()
     assert.match(html, /property="og:description"/, rel);
     assert.match(html, /property="og:url"/, rel);
     assert.match(html, /application\/ld\+json/, rel);
-    assert.match(html, /https:\/\/jonldavis-coder\.github\.io\/edgetraderpro-website\//, rel);
+    assert.match(html, /https:\/\/edgedashpro\.com\//, rel);
+    assert.doesNotMatch(html, /edgetraderpro\.com/i, rel);
+    assert.doesNotMatch(html, /Edge Trader Pro/, rel);
     assert.match(html, /Automated assistant/, rel);
     assert.match(html, /not investment advice/, rel);
   }
 });
 
-test("Stripe Payment Link slots are empty and fall back to mailto", () => {
+test("paid checkout opens the app pricing page and waitlist falls back to mailto", () => {
   const js = readFileSync(join(ROOT, "assets/js/checkout-config.js"), "utf8");
-  assert.match(js, /paidMonthly:\s*""/);
-  assert.match(js, /paidAnnual:\s*""/);
+  assert.match(js, /paidMonthly:\s*"https:\/\/app\.edgedashpro\.com\/pricing"/);
+  assert.match(js, /paidAnnual:\s*"https:\/\/app\.edgedashpro\.com\/pricing"/);
   assert.match(js, /waitlist:\s*""/);
   assert.doesNotMatch(js, /\$\d/);
-  assert.match(js, /mailto:hello@edgetraderpro.com/);
+  assert.match(js, /mailto:hello@edgedashpro\.com/);
   assert.match(js, /return \{ href: config\.mailto, via: "mailto" \}/);
+  const access = readFileSync(join(ROOT, "access/index.html"), "utf8");
+  assert.match(access, /https:\/\/app\.edgedashpro\.com\/pricing/);
+  assert.doesNotMatch(access, /Payment Links are empty/);
 });
 
 test("client scripts do not call the network", () => {
@@ -225,7 +231,7 @@ test("internal links resolve to a file", () => {
 test("sitemap lists public pages and omits noindex utility pages", () => {
   const xml = readFileSync(join(ROOT, "sitemap.xml"), "utf8");
   for (const path of ["", "features/", "market/", "journal/", "research/", "access/", "faq/", "support/", "contact/", "privacy/", "terms/", "sitemap/"]) {
-    assert.match(xml, new RegExp("edgetraderpro-website/" + path.replace("/", "\\/")));
+    assert.match(xml, new RegExp("https://edgedashpro\\.com/" + path.replace("/", "\\/")));
   }
   assert.doesNotMatch(xml, /thank-you/);
   assert.doesNotMatch(xml, /checkout-canceled/);
@@ -233,5 +239,26 @@ test("sitemap lists public pages and omits noindex utility pages", () => {
   assert.doesNotMatch(xml, /\/charts\//);
   assert.doesNotMatch(xml, /\/rules\//);
   const robots = readFileSync(join(ROOT, "robots.txt"), "utf8");
-  assert.match(robots, /Sitemap: https:\/\/jonldavis-coder\.github\.io\/edgetraderpro-website\/sitemap\.xml/);
+  assert.match(robots, /Sitemap: https:\/\/edgedashpro\.com\/sitemap\.xml/);
+  assert.match(robots, /Disallow: \/thank-you\//);
+  assert.match(robots, /Disallow: \/checkout-canceled\//);
+});
+
+test("published copy uses EdgeDashPro and hello@edgedashpro.com", () => {
+  const pattern = /Edge Trader Pro|edgetraderpro\.com|jonldavis-coder\.github\.io/i;
+  const hits = [];
+  for (const file of files) {
+    const text = readFileSync(file, "utf8");
+    if (pattern.test(text)) hits.push(relative(ROOT, file));
+  }
+  for (const file of ["scripts/build-site.mjs", "scripts/build-logo.py", "README.md", "CNAME"]) {
+    const text = readFileSync(join(ROOT, file), "utf8");
+    if (pattern.test(text)) hits.push(file);
+  }
+  assert.deepEqual(hits, []);
+  const home = readFileSync(join(ROOT, "index.html"), "utf8");
+  assert.match(home, /EdgeDashPro/);
+  assert.match(home, /hello@edgedashpro\.com/);
+  assert.match(home, /eDP monogram/);
+  assert.doesNotMatch(home, /candlestick/i);
 });

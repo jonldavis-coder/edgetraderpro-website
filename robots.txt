@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Disallow: /edgetraderpro-website/thank-you/
-Disallow: /edgetraderpro-website/checkout-canceled/
+Disallow: /thank-you/
+Disallow: /checkout-canceled/
 
-Sitemap: https://jonldavis-coder.github.io/edgetraderpro-website/sitemap.xml
+Sitemap: https://edgedashpro.com/sitemap.xml

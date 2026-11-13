@@ -3,12 +3,13 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const BASE = "https://jonldavis-coder.github.io/edgetraderpro-website";
+const BASE = "https://edgedashpro.com";
+const CHECKOUT = "https://app.edgedashpro.com/pricing";
 const DISCLAIMER =
-  "Edge Trader Pro is not investment advice. Trading involves risk of loss. Past results do not guarantee future results.";
+  "EdgeDashPro is not investment advice. Trading involves risk of loss. Past results do not guarantee future results.";
 const MAILTO =
-  "mailto:hello@edgetraderpro.com?subject=" +
-  encodeURIComponent("Edge Trader Pro — request access");
+  "mailto:hello@edgedashpro.com?subject=" +
+  encodeURIComponent("EdgeDashPro — request access");
 const LOCK =
   "Every free public view is locked server-side to $1–$50 only and float under 40M. Signals is locked to Price Spike Up and Price Spike Down at 5% on those stocks. Free visitors see only those locked presets. They cannot change or customize filters. Interactive filter controls and saved filter presets are paid.";
 const DATA =
@@ -68,11 +69,11 @@ function shot(title, caption) {
 
 const faq = [
   {
-    q: "What is Edge Trader Pro?",
-    a: "Edge Trader Pro is a web desk for people who trade their own plan. The tagline is Your rules. Your data. Your desk. Launch is two tiers: a free public tier, and a paid tier for a user account."
+    q: "What is EdgeDashPro?",
+    a: "EdgeDashPro is a web desk for people who trade their own plan. The tagline is Your rules. Your data. Your desk. Launch is two tiers: a free public tier, and a paid tier for a user account."
   },
   {
-    q: "Is Edge Trader Pro investment advice?",
+    q: "Is EdgeDashPro investment advice?",
     a: DISCLAIMER + " Nothing on this website is a recommendation to buy or sell. The desk is a process tool. It does not publish customer results."
   },
   {
@@ -97,11 +98,11 @@ const faq = [
   },
   {
     q: "Will the desk place trades for me?",
-    a: "No. You use the desk yourself. Edge Trader Pro does not buy or sell for you. It is not a brokerage. This website does not offer a service that buys or sells for you."
+    a: "No. You use the desk yourself. EdgeDashPro does not buy or sell for you. It is not a brokerage. This website does not offer a service that buys or sells for you."
   },
   {
     q: "How do I get access, and what does it cost?",
-    a: "The free public tier is $0 and needs no checkout. Paid Monthly is $29.99/month and Paid Annual is $259/year, with no free trial. The paid launch holds 25 users. Stripe Payment Link slots are empty, so the paid and waitlist buttons email hello@edgetraderpro.com until a link is filled in."
+    a: "The free public tier is $0 and needs no checkout. Paid Monthly is $29.99/month and Paid Annual is $259/year, with no free trial of the subscription. Continue to Paid Monthly and Continue to Paid Annual open https://app.edgedashpro.com/pricing, straight to Stripe Checkout. The paid launch holds 25 users. The waitlist button emails hello@edgedashpro.com."
   },
   {
     q: "Does the free tier show ads?",
@@ -109,7 +110,7 @@ const faq = [
   },
   {
     q: "How do I reach support?",
-    a: "Email hello@edgetraderpro.com. Say what you were doing and what you expected. Do not send account numbers, passwords, or API keys. This site does not promise a response time."
+    a: "Email hello@edgedashpro.com. Say what you were doing and what you expected. Do not send account numbers, passwords, or API keys. This site does not promise a response time."
   },
   {
     q: "Does the automated assistant send my question anywhere?",
@@ -163,7 +164,7 @@ function layout(page) {
         "@type": "WebSite",
         "@id": BASE + "/#website",
         url: BASE + "/",
-        name: "Edge Trader Pro",
+        name: "EdgeDashPro",
         description: page.description,
         publisher: { "@id": BASE + "/#org" },
         inLanguage: "en"
@@ -171,15 +172,15 @@ function layout(page) {
       {
         "@type": "Organization",
         "@id": BASE + "/#org",
-        name: "Edge Trader Pro",
+        name: "EdgeDashPro",
         url: BASE + "/",
-        email: "hello@edgetraderpro.com",
+        email: "hello@edgedashpro.com",
         slogan: "Your rules. Your data. Your desk.",
         logo: BASE + "/assets/img/logo.svg"
       },
       {
         "@type": "SoftwareApplication",
-        name: "Edge Trader Pro",
+        name: "EdgeDashPro",
         applicationCategory: "FinanceApplication",
         operatingSystem: "Web",
         url: BASE + "/",
@@ -233,14 +234,14 @@ function layout(page) {
   <meta name="robots" content="${robots}">
   <link rel="canonical" href="${url}">
   <meta name="theme-color" content="#07142e">
-  <meta property="og:site_name" content="Edge Trader Pro">
+  <meta property="og:site_name" content="EdgeDashPro">
   <meta property="og:locale" content="en_US">
   <meta property="og:type" content="website">
   <meta property="og:title" content="${page.title}">
   <meta property="og:description" content="${page.description}">
   <meta property="og:url" content="${url}">
   <meta property="og:image" content="${BASE}/assets/img/og.png">
-  <meta property="og:image:alt" content="Edge Trader Pro mark on navy, with the tagline Your rules. Your data. Your desk.">
+  <meta property="og:image:alt" content="EdgeDashPro mark on navy, with the tagline Your rules. Your data. Your desk.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${page.title}">
   <meta name="twitter:description" content="${page.description}">
@@ -256,8 +257,8 @@ function layout(page) {
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="${href(page.file, "")}">
-        <img src="${pre}assets/img/mark.svg" alt="" width="48" height="92">
-        <span class="brand-name">Edge Trader Pro</span>
+        <img src="${pre}assets/img/mark.svg" alt="" width="132" height="48">
+        <span class="brand-name">EdgeDashPro</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
       <nav class="site-nav" id="site-nav" aria-label="Primary">
@@ -274,10 +275,10 @@ function layout(page) {
     <div class="wrap">
       <p class="disclaimer"><strong>Risk.</strong> ${DISCLAIMER}</p>
       <div class="footer-grid">
-        <p class="fine" style="margin:0">Edge Trader Pro · Your rules. Your data. Your desk.</p>
+        <p class="fine" style="margin:0">EdgeDashPro · Your rules. Your data. Your desk.</p>
         <ul class="footer-links">${footer}</ul>
       </div>
-      <p class="legal-note">Public pages are $0, with no login, and ad-supported. A free account unlocks browser-based Squawk for the first 7 days. After that, Squawk requires Paid. Paid is $29.99 a month or $259 a year, a 25-user launch, with no free trial of the subscription. Stripe Payment Links are empty until filled in, so those buttons email hello@edgetraderpro.com. Screenshot frames are placeholders. © 2026 Edge Trader Pro.</p>
+      <p class="legal-note">Public pages are $0, with no login, and ad-supported. A free account unlocks browser-based Squawk for the first 7 days. After that, Squawk requires Paid. Paid is $29.99 a month or $259 a year, a 25-user launch, with no free trial of the subscription. Continue to Paid Monthly and Continue to Paid Annual open https://app.edgedashpro.com/pricing, straight to Stripe Checkout. The waitlist button emails hello@edgedashpro.com. Screenshot frames are placeholders. © 2026 EdgeDashPro.</p>
     </div>
   </footer>
   <div class="assistant">
@@ -321,13 +322,13 @@ pages.push({
   file: "index.html",
   slug: "",
   crumb: "Home",
-  title: "Edge Trader Pro — Your rules. Your data. Your desk.",
+  title: "EdgeDashPro — Your rules. Your data. Your desk.",
   description:
-    "Edge Trader Pro: free public pages at $0 with no login, a 7-day Squawk trial on a free account, and paid at $29.99 a month or $259 a year with no free trial of the subscription. Not investment advice.",
+    "EdgeDashPro: free public pages at $0 with no login, a 7-day Squawk trial on a free account, and paid at $29.99 a month or $259 a year with no free trial of the subscription. Not investment advice.",
   body: `<div class="wrap">
     <section class="hero">
-      <img class="hero-logo" src="assets/img/logo.svg" alt="Edge Trader Pro mark: an italic e over a bar, a capital T with a small pro, and rising candlesticks.">
-      <h1>Edge Trader Pro</h1>
+      <img class="hero-logo" src="assets/img/logo.svg" alt="EdgeDashPro monogram: a lowercase e beside uppercase D and P, cut by a blue diagonal slash.">
+      <h1>EdgeDashPro</h1>
       <p class="tagline">Your rules. Your data. Your desk.</p>
       <p class="lede">Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research are free, ad-supported, and read-only, with no login. Those views stay on locked presets: $1–$50, float under 40M, and Price Spike Up or Price Spike Down at 5% on Signals. A free account unlocks browser-based Squawk for the first 7 days. Paid unlocks the interactive filter controls, saved filter presets, the journal, and ad-free Squawk. The paid subscription has no free trial.</p>
       <div class="cta-row">
@@ -335,12 +336,12 @@ pages.push({
         <a class="btn btn-ghost" href="features/">See what is on the desk</a>
       </div>
       <p class="fine">Public pages $0, no login. Squawk needs a free account and lasts 7 days. Paid $29.99/month or $259/year. 25-user launch. No free trial of the subscription.</p>
-      <p class="mark-note">The candlesticks in the mark are the brand, not a chart of results. This site does not publish performance.</p>
+      <p class="mark-note">The eDP monogram is the brand mark. This site does not publish performance.</p>
     </section>
     <section class="section" aria-labelledby="tiers-heading">
       <p class="kicker">Launch</p>
       <h2 id="tiers-heading">Two tiers</h2>
-      <p class="section-intro">Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research do not require a login. Filters on those views cannot be changed. Squawk needs a free account and lasts 7 days. Paid checkout goes straight to Stripe when a Payment Link is filled in. Until then, the paid buttons email hello@edgetraderpro.com.</p>
+      <p class="section-intro">Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research do not require a login. Filters on those views cannot be changed. Squawk needs a free account and lasts 7 days. Continue to Paid Monthly and Continue to Paid Annual open https://app.edgedashpro.com/pricing, straight to Stripe Checkout, with no free trial of the subscription.</p>
       <div class="card-grid">
         <article class="card">
           <p class="tier-note">Free public</p>
@@ -434,7 +435,7 @@ pages.push({
   file: "features/index.html",
   slug: "features",
   crumb: "Features",
-  title: "Features — Edge Trader Pro",
+  title: "Features — EdgeDashPro",
   description:
     "Free public pages need no login: Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research. Signals is locked to a 5% price spike on $1–$50 names with float under 40M. Custom filters are paid. A free account unlocks Squawk for the first 7 days.",
   body: `<div class="wrap">
@@ -463,7 +464,7 @@ pages.push({
       <h2 id="filters">Locked presets</h2>
       <p>${LOCK} The lock is applied on the server. The free desk does not offer a control that changes the price band, the float band, or the 5% spike preset, and it does not save a preset.</p>
       <h2 id="paid">Paid tier</h2>
-      <p>Paid Monthly is $29.99/month. Paid Annual is $259/year. There is no free trial. Checkout goes straight to Stripe. The paid launch holds 25 users. Until a Stripe Payment Link is filled in, the buttons on the <a href="../access/">pricing page</a> email hello@edgetraderpro.com.</p>
+      <p>Paid Monthly is $29.99/month. Paid Annual is $259/year. There is no free trial of the subscription. Continue to Paid Monthly and Continue to Paid Annual open <a href="${CHECKOUT}">https://app.edgedashpro.com/pricing</a>, straight to Stripe Checkout. The paid launch holds 25 users. The waitlist button emails hello@edgedashpro.com.</p>
       <p>Paid unlocks three things, each scoped per user account:</p>
       <ul>
         <li>Interactive filter controls, custom filtering, and saved filter presets.</li>
@@ -493,9 +494,9 @@ pages.push({
   file: "market/index.html",
   slug: "market",
   crumb: "Market",
-  title: "Market — Edge Trader Pro",
+  title: "Market — EdgeDashPro",
   description:
-    "The Edge Trader Pro market page is free and read-only. Filters are locked server-side to $1–$50 only and float under 40M. Delayed and cached quotes are tagged.",
+    "The EdgeDashPro market page is free and read-only. Filters are locked server-side to $1–$50 only and float under 40M. Delayed and cached quotes are tagged.",
   body: `<div class="wrap">
     <header class="page-hero">
       <p class="kicker">Free public · read-only</p>
@@ -527,9 +528,9 @@ pages.push({
   file: "journal/index.html",
   slug: "journal",
   crumb: "Journal",
-  title: "Trade Journal — Edge Trader Pro",
+  title: "Trade Journal — EdgeDashPro",
   description:
-    "The Edge Trader Pro journal is paid: a unified trade journal, a profit and loss calendar, and post-trade insight cards, scoped to the user account. Not investment advice.",
+    "The EdgeDashPro journal is paid: a unified trade journal, a profit and loss calendar, and post-trade insight cards, scoped to the user account. Not investment advice.",
   body: `<div class="wrap">
     <header class="page-hero">
       <p class="kicker">Paid · per account</p>
@@ -561,9 +562,9 @@ pages.push({
   file: "research/index.html",
   slug: "research",
   crumb: "Research",
-  title: "Research — Edge Trader Pro",
+  title: "Research — EdgeDashPro",
   description:
-    "Free public Dilution, Stock Card, and Research pages on Edge Trader Pro. Read-only. Fields without a feed stay n/a. Not investment advice.",
+    "Free public Dilution, Stock Card, and Research pages on EdgeDashPro. Read-only. Fields without a feed stay n/a. Not investment advice.",
   body: `<div class="wrap">
     <header class="page-hero">
       <p class="kicker">Free public · read-only</p>
@@ -599,15 +600,15 @@ pages.push({
   file: "access/index.html",
   slug: "access",
   crumb: "Pricing",
-  title: "Pricing and Access — Edge Trader Pro",
+  title: "Pricing and Access — EdgeDashPro",
   description:
-    "Edge Trader Pro pricing: free public tier $0, Paid Monthly $29.99/month, or Paid Annual $259/year. 25-user launch. No free trial. Stripe Checkout when a Payment Link is filled in.",
+    "EdgeDashPro pricing: free public tier $0, Paid Monthly $29.99/month, or Paid Annual $259/year. 25-user launch. No free trial. Paid buttons open https://app.edgedashpro.com/pricing.",
   extraGraph: [
     {
       "@type": "Product",
-      name: "Edge Trader Pro",
+      name: "EdgeDashPro",
       description: "Free public tier and paid tier. Not investment advice.",
-      brand: { "@type": "Brand", name: "Edge Trader Pro" },
+      brand: { "@type": "Brand", name: "EdgeDashPro" },
       offers: [
         {
           "@type": "Offer",
@@ -637,7 +638,7 @@ pages.push({
     <header class="page-hero">
       <p class="kicker">Pricing</p>
       <h1>Pricing and access</h1>
-      <p class="lede" style="margin-left:0">Public pages are free and need no login. Every free view is locked to $1–$50 and float under 40M, and Signals is locked to Price Spike Up and Price Spike Down at 5%. Visitors cannot change those filters. A free account unlocks browser-based Squawk for the first 7 days. After that, Squawk requires Paid and is ad-free. Paid goes straight to Stripe Checkout, with no free trial of the subscription. The paid launch holds 25 users. Payment Links are empty, so the paid buttons email hello@edgetraderpro.com until a link is filled in.</p>
+      <p class="lede" style="margin-left:0">Public pages are free and need no login. Every free view is locked to $1–$50 and float under 40M, and Signals is locked to Price Spike Up and Price Spike Down at 5%. Visitors cannot change those filters. A free account unlocks browser-based Squawk for the first 7 days. After that, Squawk requires Paid and is ad-free. Continue to Paid Monthly ($29.99/month) and Continue to Paid Annual ($259/year) open https://app.edgedashpro.com/pricing, straight to Stripe Checkout, with no free trial of the subscription. The paid launch holds 25 users. The waitlist button emails hello@edgedashpro.com.</p>
     </header>
     <div class="card-grid">
       <article class="card">
@@ -663,8 +664,8 @@ pages.push({
           <li>Journal: unified trade journal, P&amp;L calendar, and post-trade insight cards</li>
           <li>Ad-free Squawk, required after the first 7 days</li>
         </ul>
-        <p><a class="btn btn-primary" data-checkout="paidMonthly" href="${MAILTO}">Continue to Paid Monthly</a></p>
-        <p class="fine" data-checkout-note="paidMonthly">Paid Monthly is $29.99/month. There is no free trial. The Stripe Payment Link is not filled in yet, so this opens an email to hello@edgetraderpro.com.</p>
+        <p><a class="btn btn-primary" data-checkout="paidMonthly" href="${CHECKOUT}">Continue to Paid Monthly</a></p>
+        <p class="fine" data-checkout-note="paidMonthly">Continue to Paid Monthly opens https://app.edgedashpro.com/pricing. Straight to Stripe Checkout. There is no free trial of the subscription.</p>
       </article>
       <article class="card">
         <p class="tier-note">Paid annual</p>
@@ -676,16 +677,16 @@ pages.push({
           <li>Scoped per user account</li>
           <li>25-user launch</li>
         </ul>
-        <p><a class="btn btn-primary" data-checkout="paidAnnual" href="${MAILTO}">Continue to Paid Annual</a></p>
-        <p class="fine" data-checkout-note="paidAnnual">Paid Annual is $259/year. There is no free trial. The Stripe Payment Link is not filled in yet, so this opens an email to hello@edgetraderpro.com.</p>
+        <p><a class="btn btn-primary" data-checkout="paidAnnual" href="${CHECKOUT}">Continue to Paid Annual</a></p>
+        <p class="fine" data-checkout-note="paidAnnual">Continue to Paid Annual opens https://app.edgedashpro.com/pricing. Straight to Stripe Checkout. There is no free trial of the subscription.</p>
       </article>
     </div>
     <section class="section">
       <div class="band">
         <h2>Waitlist</h2>
-        <p>The paid launch is capped at 25 users. If you want a paid place, or the Payment Link is still empty, email hello@edgetraderpro.com. This site does not promise a response time. You are not charged by this marketing website.</p>
+        <p>The paid launch is capped at 25 users. Paid Monthly and Paid Annual open https://app.edgedashpro.com/pricing. If those 25 places are full, email hello@edgedashpro.com to join the waitlist. This site does not promise a response time. You are not charged by this marketing website.</p>
         <p><a class="btn btn-ghost" data-checkout="waitlist" href="${MAILTO}">Email the waitlist</a></p>
-        <p class="fine" data-checkout-note="waitlist">This opens an email to hello@edgetraderpro.com.</p>
+        <p class="fine" data-checkout-note="waitlist">This opens an email to hello@edgedashpro.com.</p>
         <p class="fine"><a href="../checkout-canceled/">Checkout canceled</a> · <a href="../thank-you/">Thank you</a></p>
       </div>
     </section>
@@ -697,9 +698,9 @@ pages.push({
   file: "faq/index.html",
   slug: "faq",
   crumb: "FAQ",
-  title: "FAQ — Edge Trader Pro",
+  title: "FAQ — EdgeDashPro",
   description:
-    "Answers about Edge Trader Pro: the free public tier, the paid tier, locked filters, data feeds, the journal, and the risk disclaimer.",
+    "Answers about EdgeDashPro: the free public tier, the paid tier, locked filters, data feeds, the journal, and the risk disclaimer.",
   extraGraph: [
     {
       "@type": "FAQPage",
@@ -724,15 +725,15 @@ pages.push({
   file: "support/index.html",
   slug: "support",
   crumb: "Support",
-  title: "Support — Edge Trader Pro",
+  title: "Support — EdgeDashPro",
   description:
-    "Contact Edge Trader Pro support at hello@edgetraderpro.com. Do not send account numbers, passwords, or API keys.",
+    "Contact EdgeDashPro support at hello@edgedashpro.com. Do not send account numbers, passwords, or API keys.",
   body: `<div class="wrap prose">
     <header class="page-hero">
       <p class="kicker">Support</p>
       <h1>Support</h1>
     </header>
-    <p>Email <a href="mailto:hello@edgetraderpro.com">hello@edgetraderpro.com</a>. This site does not promise a response time, and it does not offer phone support.</p>
+    <p>Email <a href="mailto:hello@edgedashpro.com">hello@edgedashpro.com</a>. This site does not promise a response time, and it does not offer phone support.</p>
     <h2>What to include</h2>
     <ul>
       <li>What you were trying to do.</li>
@@ -742,7 +743,7 @@ pages.push({
     <h2>What to leave out</h2>
     <p>Do not send account numbers, passwords, API keys, or brokerage logins. We do not need them to answer a question about this website.</p>
     <p>The <a href="../faq/">FAQ</a> covers the disclaimer, the free and paid tiers, data feeds, and the journal. Pricing is on the <a href="../access/">pricing page</a>. The automated assistant on each page answers from this website only.</p>
-    <p><a class="btn btn-primary" href="mailto:hello@edgetraderpro.com?subject=Edge%20Trader%20Pro%20support">Email support</a></p>
+    <p><a class="btn btn-primary" href="mailto:hello@edgedashpro.com?subject=EdgeDashPro%20support">Email support</a></p>
   </div>`
 });
 
@@ -750,24 +751,24 @@ pages.push({
   file: "contact/index.html",
   slug: "contact",
   crumb: "Contact",
-  title: "Contact — Edge Trader Pro",
+  title: "Contact — EdgeDashPro",
   description:
-    "Contact Edge Trader Pro at hello@edgetraderpro.com for the paid tier, the waitlist, or a question. The form opens your email app.",
+    "Contact EdgeDashPro at hello@edgedashpro.com for the paid tier, the waitlist, or a question. The form opens your email app.",
   extraGraph: [
     {
       "@type": "ContactPage",
       url: BASE + "/contact/",
-      name: "Contact Edge Trader Pro",
-      description: "Email hello@edgetraderpro.com."
+      name: "Contact EdgeDashPro",
+      description: "Email hello@edgedashpro.com."
     }
   ],
   body: `<div class="wrap">
     <header class="page-hero">
       <p class="kicker">Contact</p>
       <h1>Contact</h1>
-      <p class="lede" style="margin-left:0">Write to <a href="mailto:hello@edgetraderpro.com">hello@edgetraderpro.com</a>. The form opens your email app. This website does not store the message.</p>
+      <p class="lede" style="margin-left:0">Write to <a href="mailto:hello@edgedashpro.com">hello@edgedashpro.com</a>. The form opens your email app. This website does not store the message.</p>
     </header>
-    <form class="form" data-contact-form action="mailto:hello@edgetraderpro.com" method="post" enctype="text/plain">
+    <form class="form" data-contact-form action="mailto:hello@edgedashpro.com" method="post" enctype="text/plain">
       <label>Name <input name="name" type="text" autocomplete="name" required></label>
       <label>Email <input name="email" type="email" autocomplete="email" required></label>
       <label>Topic
@@ -791,16 +792,16 @@ pages.push({
   file: "privacy/index.html",
   slug: "privacy",
   crumb: "Privacy",
-  title: "Privacy Policy (Draft) — Edge Trader Pro",
+  title: "Privacy Policy (Draft) — EdgeDashPro",
   description:
-    "Draft privacy notice for the Edge Trader Pro marketing site. The free product tier is ad-supported. Contact is by email. The assistant stays in the browser.",
+    "Draft privacy notice for the EdgeDashPro marketing site. The free product tier is ad-supported. Contact is by email. The assistant stays in the browser.",
   body: `<div class="wrap prose">
     <header class="page-hero">
       <p class="kicker">Draft</p>
       <h1>Privacy</h1>
     </header>
     <p class="draft-banner"><strong>Draft.</strong> This is a working notice for the marketing site, not a final privacy policy. It will be replaced when paid checkout is open.</p>
-    <p>Edge Trader Pro can be reached at hello@edgetraderpro.com. This page describes the marketing website, and it names how the product tiers differ.</p>
+    <p>EdgeDashPro can be reached at hello@edgedashpro.com. This page describes the marketing website, and it names how the product tiers differ.</p>
     <h2>What this site collects</h2>
     <p>You do not create an account on this marketing site. Market, News, JAMSEC, Dilution, Stock Card, and Research do not require a login. Browser-based Squawk does: a free account in the product unlocks it for the first 7 days, and after that Squawk requires a paid account. That account is part of the product, not a form on these pages. If you email us, we receive what you chose to send, including your address and the message. Do not send account numbers, passwords, or API keys.</p>
     <p>This marketing site does not run its own analytics product and does not sell personal information. The site is hosted on GitHub Pages. The host may keep ordinary request logs. This notice does not control the host's own logging.</p>
@@ -809,13 +810,13 @@ pages.push({
     <h2>The automated assistant</h2>
     <p>The assistant runs in your browser. Your question is matched against text that shipped with this website. The page does not send that question to another service.</p>
     <h2>Checkout</h2>
-    <p>When a Stripe Payment Link is filled in, paid checkout is handled by Stripe. There is no free trial. This marketing site does not store a card number. Until a link is filled in, the paid buttons open an email instead.</p>
+    <p>Continue to Paid Monthly and Continue to Paid Annual open https://app.edgedashpro.com/pricing. Checkout there is handled by Stripe. There is no free trial of the subscription. This marketing site does not store a card number. The waitlist button opens an email to hello@edgedashpro.com instead.</p>
     <h2>Cookies</h2>
     <p>This marketing site does not set a tracking cookie for advertising. Your browser may store nothing from us. The host may use its own technical cookies.</p>
     <h2>Children</h2>
     <p>This site is not directed at children.</p>
     <h2>Changes</h2>
-    <p>When this draft is replaced, the new notice will be posted on this page. Questions: <a href="mailto:hello@edgetraderpro.com">hello@edgetraderpro.com</a>.</p>
+    <p>When this draft is replaced, the new notice will be posted on this page. Questions: <a href="mailto:hello@edgedashpro.com">hello@edgedashpro.com</a>.</p>
   </div>`
 });
 
@@ -823,9 +824,9 @@ pages.push({
   file: "terms/index.html",
   slug: "terms",
   crumb: "Terms",
-  title: "Terms of Use (Draft) — Edge Trader Pro",
+  title: "Terms of Use (Draft) — EdgeDashPro",
   description:
-    "Draft terms for the Edge Trader Pro marketing site. Not investment advice. Free tier $0. Paid is $29.99 a month or $259 a year, with no free trial.",
+    "Draft terms for the EdgeDashPro marketing site. Not investment advice. Free tier $0. Paid is $29.99 a month or $259 a year, with no free trial.",
   body: `<div class="wrap prose">
     <header class="page-hero">
       <p class="kicker">Draft</p>
@@ -836,19 +837,19 @@ pages.push({
     <h2>The tiers</h2>
     <p>Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research are $0. They do not require a login. They are ad-supported and read-only. ${LOCK}</p>
     <p>Browser-based Squawk is not on those pages. Free users must create a free account to access the 7-day Squawk trial. After 7 days, Squawk requires Paid and is ad-free. That window is only for Squawk.</p>
-    <p>Paid Monthly is $29.99/month. Paid Annual is $259/year. The paid launch holds 25 users. There is no free trial of the subscription. Checkout goes straight to Stripe when a Payment Link is filled in. Until then, the button emails hello@edgetraderpro.com and you are not charged by this website. Paid unlocks the interactive filter controls, custom filtering, saved filter presets, the journal, and ad-free Squawk, each scoped to the user account.</p>
+    <p>Paid Monthly is $29.99/month. Paid Annual is $259/year. The paid launch holds 25 users. There is no free trial of the subscription. Continue to Paid Monthly and Continue to Paid Annual open https://app.edgedashpro.com/pricing, straight to Stripe Checkout. The waitlist button emails hello@edgedashpro.com. You are not charged by this marketing website. Paid unlocks the interactive filter controls, custom filtering, saved filter presets, the journal, and ad-free Squawk, each scoped to the user account.</p>
     <h2>The website</h2>
-    <p>The pages describe Edge Trader Pro. They are informational. A description of a feature is not a promise that a particular feed is connected on a particular day. Standard Terms, Privacy, and the risk disclosure apply to both tiers.</p>
+    <p>The pages describe EdgeDashPro. They are informational. A description of a feature is not a promise that a particular feed is connected on a particular day. Standard Terms, Privacy, and the risk disclosure apply to both tiers.</p>
     <h2>Your decisions</h2>
-    <p>You are responsible for your own trading decisions. Edge Trader Pro does not buy or sell for you. It is not a brokerage.</p>
+    <p>You are responsible for your own trading decisions. EdgeDashPro does not buy or sell for you. It is not a brokerage.</p>
     <h2>No warranty</h2>
     <p>The marketing site is provided as available. We do not warrant that it will be uninterrupted or free of errors. To the extent the law allows, we are not liable for decisions you make after reading it.</p>
     <h2>Your messages</h2>
     <p>Do not send account numbers, passwords, or API keys. We may keep an email you send so we can reply.</p>
     <h2>The mark and the text</h2>
-    <p>The Edge Trader Pro name, the e/T pro mark, and the text of this website belong to their owner. You may link to a page. You may not copy the site and present it as your own.</p>
+    <p>The EdgeDashPro name, the eDP monogram, and the text of this website belong to their owner. You may link to a page. You may not copy the site and present it as your own.</p>
     <h2>Contact</h2>
-    <p>Questions about these draft terms: <a href="mailto:hello@edgetraderpro.com">hello@edgetraderpro.com</a>.</p>
+    <p>Questions about these draft terms: <a href="mailto:hello@edgedashpro.com">hello@edgedashpro.com</a>.</p>
   </div>`
 });
 
@@ -857,13 +858,13 @@ pages.push({
   slug: "thank-you",
   crumb: "Thank you",
   robots: "noindex, nofollow",
-  title: "Thank you — Edge Trader Pro",
-  description: "Return page for Edge Trader Pro checkout. Paid has no free trial. Noindex.",
+  title: "Thank you — EdgeDashPro",
+  description: "Return page for EdgeDashPro checkout. Paid has no free trial. Noindex.",
   body: `<div class="wrap prose">
     <header class="page-hero">
       <h1>Thank you</h1>
     </header>
-    <p>If you reached this page from Stripe Checkout, thank you. Paid Monthly is $29.99/month and Paid Annual is $259/year. There is no free trial. If the Payment Link was empty, you will have emailed hello@edgetraderpro.com instead, and you have not been charged by this website.</p>
+    <p>If you reached this page from https://app.edgedashpro.com/pricing, thank you. Paid Monthly is $29.99/month and Paid Annual is $259/year. There is no free trial of the subscription. The waitlist email is hello@edgedashpro.com. You are not charged by this marketing website.</p>
     <p>This page is not indexed. The plan details are on <a href="../access/">Pricing and access</a>.</p>
   </div>`
 });
@@ -873,8 +874,8 @@ pages.push({
   slug: "checkout-canceled",
   crumb: "Checkout canceled",
   robots: "noindex, nofollow",
-  title: "Checkout canceled — Edge Trader Pro",
-  description: "Checkout was canceled. You have not been charged by this Edge Trader Pro website. No free trial was started. Noindex.",
+  title: "Checkout canceled — EdgeDashPro",
+  description: "Checkout was canceled. You have not been charged by this EdgeDashPro website. No free trial was started. Noindex.",
   body: `<div class="wrap prose">
     <header class="page-hero">
       <h1>Checkout canceled</h1>
@@ -888,8 +889,8 @@ pages.push({
   file: "sitemap/index.html",
   slug: "sitemap",
   crumb: "Site map",
-  title: "Site map — Edge Trader Pro",
-  description: "Every public page on the Edge Trader Pro marketing site, including draft legal pages and unindexed checkout pages.",
+  title: "Site map — EdgeDashPro",
+  description: "Every public page on the EdgeDashPro marketing site, including draft legal pages and unindexed checkout pages.",
   body: `<div class="wrap">
     <header class="page-hero">
       <h1>Site map</h1>
@@ -918,8 +919,8 @@ pages.push({
   slug: "",
   crumb: "Not found",
   robots: "noindex, nofollow",
-  title: "Page not found — Edge Trader Pro",
-  description: "That page is not on the Edge Trader Pro website. Use the site map to find a page.",
+  title: "Page not found — EdgeDashPro",
+  description: "That page is not on the EdgeDashPro website. Use the site map to find a page.",
   body: `<div class="wrap prose">
     <header class="page-hero">
       <h1>Page not found</h1>
@@ -945,18 +946,20 @@ writeFileSync(
 
 writeFileSync(
   join(ROOT, "robots.txt"),
-  `User-agent: *\nAllow: /\n\nDisallow: /edgetraderpro-website/thank-you/\nDisallow: /edgetraderpro-website/checkout-canceled/\n\nSitemap: ${BASE}/sitemap.xml\n`
+  `User-agent: *\nAllow: /\n\nDisallow: /thank-you/\nDisallow: /checkout-canceled/\n\nSitemap: ${BASE}/sitemap.xml\n`
 );
 
 writeFileSync(join(ROOT, ".nojekyll"), "");
+writeFileSync(join(ROOT, "CNAME"), "edgedashpro.com\n");
 
 writeFileSync(
   join(ROOT, "site.webmanifest"),
   JSON.stringify(
     {
-      name: "Edge Trader Pro",
-      short_name: "Edge Trader Pro",
-      start_url: "./",
+      name: "EdgeDashPro",
+      short_name: "EdgeDashPro",
+      id: "https://edgedashpro.com/",
+      start_url: "https://edgedashpro.com/",
       display: "browser",
       background_color: "#07142e",
       theme_color: "#07142e",

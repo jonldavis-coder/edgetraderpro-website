@@ -2,8 +2,8 @@
    The assistant does not load anything else. */
 window.ETPKnowledge = [
   {
-    keywords: ["edge", "trader", "pro", "desk", "about", "product", "today"],
-    answer: "Edge Trader Pro is a web desk for people who trade their own plan. The tagline is Your rules. Your data. Your desk. Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research are $0, need no login, and are ad-supported and read-only. Every free view is locked server-side to $1–$50 only and float under 40M. Signals is locked to Price Spike Up and Price Spike Down at 5%. Free visitors cannot change or customize filters. Browser-based Squawk is not on those pages. A free account unlocks Squawk for the first 7 days. After that, Squawk requires Paid and is ad-free. The paid subscription has no free trial.",
+    keywords: ["edge", "edgedashpro", "dash", "desk", "about", "product", "today"],
+    answer: "EdgeDashPro is a web desk for people who trade their own plan. The tagline is Your rules. Your data. Your desk. Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research are $0, need no login, and are ad-supported and read-only. Every free view is locked server-side to $1–$50 only and float under 40M. Signals is locked to Price Spike Up and Price Spike Down at 5%. Free visitors cannot change or customize filters. Browser-based Squawk is not on those pages. A free account unlocks Squawk for the first 7 days. After that, Squawk requires Paid and is ad-free. The paid subscription has no free trial.",
     more: { slug: "features/", label: "Features" }
   },
   {
@@ -13,7 +13,7 @@ window.ETPKnowledge = [
   },
   {
     keywords: ["advice", "invest", "investment", "risk", "loss", "guarantee", "disclaimer", "past", "results"],
-    answer: "Edge Trader Pro is not investment advice. Trading involves risk of loss. Past results do not guarantee future results. This site does not publish profit, loss, win rate, or customer results.",
+    answer: "EdgeDashPro is not investment advice. Trading involves risk of loss. Past results do not guarantee future results. This site does not publish profit, loss, win rate, or customer results.",
     more: { slug: "faq/", label: "FAQ" }
   },
   {
@@ -68,7 +68,7 @@ window.ETPKnowledge = [
   },
   {
     keywords: ["price", "pricing", "cost", "pay", "payment", "stripe", "waitlist", "access", "checkout", "buy", "month", "year", "trial", "29", "259"],
-    answer: "Market, News, JAMSEC, Dilution, Stock Card, and Research are $0 and need no login. A free account unlocks browser-based Squawk for the first 7 days. After 7 days, Squawk requires Paid and is ad-free. Paid Monthly is $29.99/month and Paid Annual is $259/year. The paid subscription has no free trial and goes straight to Stripe. The paid launch holds 25 users. Payment Link slots are empty, so the buttons email hello@edgetraderpro.com until a link is filled in.",
+    answer: "Market, News, JAMSEC, Dilution, Stock Card, and Research are $0 and need no login. A free account unlocks browser-based Squawk for the first 7 days. After 7 days, Squawk requires Paid and is ad-free. Paid Monthly is $29.99/month and Paid Annual is $259/year. Continue to Paid Monthly and Continue to Paid Annual open https://app.edgedashpro.com/pricing, straight to Stripe Checkout. There is no free trial of the subscription. The paid launch holds 25 users. The waitlist button emails hello@edgedashpro.com.",
     more: { slug: "access/", label: "Pricing" }
   },
   {
@@ -83,17 +83,17 @@ window.ETPKnowledge = [
   },
   {
     keywords: ["place", "trades", "trade for me", "brokerage", "buy for me", "sell for me"],
-    answer: "No. You use the desk yourself. Edge Trader Pro does not buy or sell for you. It is not a brokerage. The journal records what you enter on the paid account.",
+    answer: "No. You use the desk yourself. EdgeDashPro does not buy or sell for you. It is not a brokerage. The journal records what you enter on the paid account.",
     more: { slug: "faq/", label: "FAQ" }
   },
   {
     keywords: ["support", "help", "broken", "question", "contact", "email", "hello"],
-    answer: "Email hello@edgetraderpro.com. This site does not promise a response time. Say what you were doing and what you expected. Do not include account numbers, passwords, or API keys.",
+    answer: "Email hello@edgedashpro.com. This site does not promise a response time. Say what you were doing and what you expected. Do not include account numbers, passwords, or API keys.",
     more: { slug: "support/", label: "Support" }
   },
   {
     keywords: ["assistant", "chat", "privacy", "cookie", "cookies", "terms", "policy"],
-    answer: "The automated assistant runs in your browser and answers from this website only. It does not send your question to another service. This marketing site does not ask you to create an account. The free product tier is ad-supported. Privacy and terms pages are drafts. Edge Trader Pro is not investment advice.",
+    answer: "The automated assistant runs in your browser and answers from this website only. It does not send your question to another service. This marketing site does not ask you to create an account. The free product tier is ad-supported. Privacy and terms pages are drafts. EdgeDashPro is not investment advice.",
     more: { slug: "privacy/", label: "Privacy" }
   }
 ];
