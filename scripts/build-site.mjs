@@ -646,7 +646,7 @@ pages.push({
         <p class="price">$0</p>
         <p>No login and no checkout for these pages. Read-only, and ad-supported.</p>
         <ul class="plan-list">
-          <li>Market, News, and JAMSEC</li>
+          <li>Market, News, JAMSEC, and Signals</li>
           <li>Dilution, Stock Card, and Research</li>
           <li>${LOCK}</li>
           <li>Browser-based Squawk is not included here. A free account unlocks it for the first 7 days.</li>
