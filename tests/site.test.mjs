@@ -147,6 +147,28 @@ test("pricing page states both tiers, Stripe slots, and no free trial", () => {
   assert.doesNotMatch(html, /Pricing is not set/);
 });
 
+test("free Signals and filters are locked presets", () => {
+  for (const file of [
+    "index.html",
+    "features/index.html",
+    "market/index.html",
+    "access/index.html",
+    "faq/index.html",
+    "assets/js/assistant-knowledge.js"
+  ]) {
+    const text = readFileSync(join(ROOT, file), "utf8");
+    assert.match(text, /\$1–\$50 only|\$1–\$50 and float under 40M/, file);
+    assert.match(text, /float under 40M/, file);
+    assert.match(text, /Price Spike Up/, file);
+    assert.match(text, /Price Spike Down/, file);
+    assert.match(text, /5%/, file);
+  }
+  const features = readFileSync(join(ROOT, "features/index.html"), "utf8");
+  assert.match(features, /cannot change or customize filters/);
+  assert.match(features, /Interactive filter controls/);
+  assert.match(features, /id="signals"/);
+});
+
 test("Squawk is a 7-day free-account trial, not a paid-plan trial", () => {
   for (const file of [
     "index.html",

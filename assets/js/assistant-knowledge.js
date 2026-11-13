@@ -3,12 +3,12 @@
 window.ETPKnowledge = [
   {
     keywords: ["edge", "trader", "pro", "desk", "about", "product", "today"],
-    answer: "Edge Trader Pro is a web desk for people who trade their own plan. The tagline is Your rules. Your data. Your desk. Market, News, JAMSEC, Dilution, Stock Card, and Research are $0, need no login, and are ad-supported and read-only. Filters are locked server-side to $1–$50 only and float under 40M. Browser-based Squawk is not on those pages. A free account unlocks Squawk for the first 7 days. After that, Squawk requires Paid and is ad-free. The paid subscription has no free trial.",
+    answer: "Edge Trader Pro is a web desk for people who trade their own plan. The tagline is Your rules. Your data. Your desk. Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research are $0, need no login, and are ad-supported and read-only. Every free view is locked server-side to $1–$50 only and float under 40M. Signals is locked to Price Spike Up and Price Spike Down at 5%. Free visitors cannot change or customize filters. Browser-based Squawk is not on those pages. A free account unlocks Squawk for the first 7 days. After that, Squawk requires Paid and is ad-free. The paid subscription has no free trial.",
     more: { slug: "features/", label: "Features" }
   },
   {
     keywords: ["free", "public", "tier", "ad-supported", "read-only", "readonly"],
-    answer: "The free public pages are $0, need no login, and are ad-supported: Market, News, JAMSEC, Dilution, Stock Card, and Research. They are read-only. Filters are locked server-side to $1–$50 only and float under 40M. There are no custom filters and no saved presets. Browser-based Squawk is not included. A free account unlocks Squawk for the first 7 days only. The paid subscription has no free trial.",
+    answer: "The free public pages are $0, need no login, and are ad-supported: Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research. They are read-only. Every free view is locked server-side to $1–$50 only and float under 40M. Signals is locked to Price Spike Up and Price Spike Down at 5%. Free visitors see only those locked presets and cannot change or customize filters. Browser-based Squawk is not included. A free account unlocks Squawk for the first 7 days only. The paid subscription has no free trial.",
     more: { slug: "features/", label: "Features" }
   },
   {
@@ -33,13 +33,18 @@ window.ETPKnowledge = [
   },
   {
     keywords: ["jamsec", "jam"],
-    answer: "JAMSEC is a free public page. It is read-only, with the same locked filters as the rest of the free tier: $1–$50 only and float under 40M. A field with no feed stays n/a. JAMSEC is not a signal and it is not advice.",
+    answer: "JAMSEC is a free public page. It is read-only, with the same locked filters as the rest of the free tier: $1–$50 only and float under 40M. A field with no feed stays n/a. JAMSEC is not a trading signal and it is not advice.",
     more: { slug: "features/", label: "Features" }
   },
   {
-    keywords: ["filter", "filters", "filtering", "preset", "presets", "saved", "custom", "band", "float", "locked", "server"],
-    answer: "On the free public tier, filters are locked server-side to $1–$50 only and float under 40M. That tier has no custom filters and no saved presets. Paid unlocks custom filtering and saved filter presets, scoped to the user account.",
+    keywords: ["filter", "filters", "filtering", "preset", "presets", "saved", "custom", "band", "float", "locked", "server", "interactive", "customize"],
+    answer: "Every free public view is locked server-side to $1–$50 only and float under 40M. Signals is locked to Price Spike Up and Price Spike Down at 5% on those stocks. Free visitors see only those locked presets. They cannot change or customize filters. Interactive filter controls, custom filtering, and saved filter presets are paid and scoped to the user account. The paid subscription has no free trial.",
     more: { slug: "market/", label: "Market" }
+  },
+  {
+    keywords: ["signal", "signals", "spike", "spikes"],
+    answer: "Signals is a free public view and needs no login. It is locked to Price Spike Up and Price Spike Down at 5%, on stocks from $1–$50 with float under 40M. The same $1–$50 and float under 40M lock applies on every free public view. Free visitors see only that locked preset and cannot change or customize filters. Interactive filter controls are paid. A price spike on Signals is not investment advice.",
+    more: { slug: "features/", label: "Features" }
   },
   {
     keywords: ["squawk", "audio", "aloud", "voice", "ad-free", "days", "7", "trial"],
@@ -68,12 +73,12 @@ window.ETPKnowledge = [
   },
   {
     keywords: ["paid", "unlock", "unlocks", "include", "includes", "subscription", "monthly", "annual", "account"],
-    answer: "Paid is $29.99/month or $259/year, scoped per user account. It unlocks custom filtering and saved filter presets, the journal (a unified trade journal, a profit and loss calendar, and post-trade insight cards and reviews), and ad-free Squawk. Ad-free Squawk is required after the first 7 days. There is no free trial of the subscription. A free account is only the 7-day Squawk trial. The paid launch holds 25 users.",
+    answer: "Paid is $29.99/month or $259/year, scoped per user account. It unlocks the interactive filter controls, custom filtering, saved filter presets, the journal (a unified trade journal, a profit and loss calendar, and post-trade insight cards and reviews), and ad-free Squawk. Free visitors cannot change the locked presets. Ad-free Squawk is required after the first 7 days. There is no free trial of the subscription. A free account is only the 7-day Squawk trial. The paid launch holds 25 users.",
     more: { slug: "access/", label: "Pricing" }
   },
   {
     keywords: ["login", "signin", "sign-in", "no login", "account"],
-    answer: "Market, News, JAMSEC, Dilution, Stock Card, and Research do not require a login. Browser-based Squawk does: create a free account to use it for the first 7 days. After 7 days, Squawk requires the paid tier and is ad-free. The paid subscription has no free trial. This marketing site does not create that account in the browser.",
+    answer: "Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research do not require a login. Those views stay on locked presets, and the filters cannot be changed. Browser-based Squawk does require an account: create a free account to use it for the first 7 days. After 7 days, Squawk requires the paid tier and is ad-free. The paid subscription has no free trial. This marketing site does not create that account in the browser.",
     more: { slug: "access/", label: "Pricing" }
   },
   {

@@ -8,7 +8,7 @@ The tagline is “Your rules. Your data. Your desk.”
 
 Launch is two tiers:
 
-- Free public pages: $0, no login, ad-supported, and read-only. Market, News, JAMSEC, Dilution, Stock Card, and Research. Filters are locked server-side to $1–$50 only and float under 40M.
+- Free public pages: $0, no login, ad-supported, and read-only. Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research. Every free view is locked server-side to $1–$50 only and float under 40M. Signals is locked to Price Spike Up and Price Spike Down at 5%. Visitors cannot change or customize filters.
 - Squawk: a free account is required. Browser-based Squawk lasts for the first 7 days. After that, Squawk requires Paid and is ad-free.
 - Paid: $29.99/month or $259/year, a 25-user launch, no free trial of the subscription. Checkout is Stripe. Payment Link slots are empty, so the buttons email hello@edgetraderpro.com until a link is filled in.
 

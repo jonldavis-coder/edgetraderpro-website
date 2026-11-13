@@ -10,7 +10,7 @@ const MAILTO =
   "mailto:hello@edgetraderpro.com?subject=" +
   encodeURIComponent("Edge Trader Pro — request access");
 const LOCK =
-  "Filters on the free tier are locked server-side to $1–$50 only and float under 40M. There are no custom filters and no saved presets on that tier.";
+  "Every free public view is locked server-side to $1–$50 only and float under 40M. Signals is locked to Price Spike Up and Price Spike Down at 5% on those stocks. Free visitors see only those locked presets. They cannot change or customize filters. Interactive filter controls and saved filter presets are paid.";
 const DATA =
   "This site does not describe the data as universally connected or real-time. A delayed quote can wear a delayed tag. A cached value can wear a cached tag. A field with no feed stays n/a. A panel without a connected feed stays grey, and a feed that is failing stays marked that way.";
 
@@ -77,7 +77,11 @@ const faq = [
   },
   {
     q: "What is on the free public tier?",
-    a: "The free public tier is $0. It does not require a login, and it is ad-supported. It is read-only: Market, News, JAMSEC, Dilution, Stock Card, and Research. " + LOCK + " Browser-based Squawk is not on those pages."
+    a: "The free public tier is $0. It does not require a login, and it is ad-supported. It is read-only: Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research. " + LOCK + " Browser-based Squawk is not on those pages."
+  },
+  {
+    q: "What can I change on Signals and the other free views?",
+    a: LOCK + " Paid is $29.99/month or $259/year, with no free trial of the subscription, and that is what unlocks the interactive filter controls."
   },
   {
     q: "How does the Squawk trial work?",
@@ -85,7 +89,7 @@ const faq = [
   },
   {
     q: "What does the paid tier unlock?",
-    a: "Paid is $29.99/month or $259/year. It is a 25-user launch with no free trial of the subscription. Checkout goes straight to Stripe. Paid unlocks custom filtering and saved filter presets, the journal, and ad-free Squawk. Each of those is scoped to the user account. Ad-free Squawk is what you need after the first 7 days. The journal is a unified trade journal, a profit and loss calendar, and post-trade insight cards and reviews."
+    a: "Paid is $29.99/month or $259/year. It is a 25-user launch with no free trial of the subscription. Checkout goes straight to Stripe. Paid unlocks the interactive filter controls, custom filtering, saved filter presets, the journal, and ad-free Squawk. Each of those is scoped to the user account. Free visitors cannot change the locked presets. Ad-free Squawk is what you need after the first 7 days. The journal is a unified trade journal, a profit and loss calendar, and post-trade insight cards and reviews."
   },
   {
     q: "Are the data feeds real-time and always connected?",
@@ -180,7 +184,7 @@ function layout(page) {
         operatingSystem: "Web",
         url: BASE + "/",
         description:
-          "Free public pages need no login. A free account unlocks browser-based Squawk for the first 7 days. Paid is $29.99 a month or $259 a year, with no free trial of the subscription, and adds custom filtering, saved filter presets, the journal, and ad-free Squawk. Not investment advice.",
+          "Free public pages need no login and stay on locked presets: $1–$50, float under 40M, and Price Spike Up or Price Spike Down at 5% on Signals. A free account unlocks browser-based Squawk for the first 7 days. Paid is $29.99 a month or $259 a year, with no free trial of the subscription, and adds interactive filter controls, saved filter presets, the journal, and ad-free Squawk. Not investment advice.",
         offers: [
           {
             "@type": "Offer",
@@ -325,7 +329,7 @@ pages.push({
       <img class="hero-logo" src="assets/img/logo.svg" alt="Edge Trader Pro mark: an italic e over a bar, a capital T with a small pro, and rising candlesticks.">
       <h1>Edge Trader Pro</h1>
       <p class="tagline">Your rules. Your data. Your desk.</p>
-      <p class="lede">Market, News, JAMSEC, Dilution, Stock Card, and Research are free, ad-supported, and read-only, with no login. A free account unlocks browser-based Squawk for the first 7 days. Paid unlocks custom filtering, saved filter presets, the journal, and ad-free Squawk. The paid subscription has no free trial.</p>
+      <p class="lede">Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research are free, ad-supported, and read-only, with no login. Those views stay on locked presets: $1–$50, float under 40M, and Price Spike Up or Price Spike Down at 5% on Signals. A free account unlocks browser-based Squawk for the first 7 days. Paid unlocks the interactive filter controls, saved filter presets, the journal, and ad-free Squawk. The paid subscription has no free trial.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="access/">See pricing</a>
         <a class="btn btn-ghost" href="features/">See what is on the desk</a>
@@ -336,19 +340,19 @@ pages.push({
     <section class="section" aria-labelledby="tiers-heading">
       <p class="kicker">Launch</p>
       <h2 id="tiers-heading">Two tiers</h2>
-      <p class="section-intro">Market, News, JAMSEC, Dilution, Stock Card, and Research do not require a login. Squawk needs a free account and lasts 7 days. Paid checkout goes straight to Stripe when a Payment Link is filled in. Until then, the paid buttons email hello@edgetraderpro.com.</p>
+      <p class="section-intro">Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research do not require a login. Filters on those views cannot be changed. Squawk needs a free account and lasts 7 days. Paid checkout goes straight to Stripe when a Payment Link is filled in. Until then, the paid buttons email hello@edgetraderpro.com.</p>
       <div class="card-grid">
         <article class="card">
           <p class="tier-note">Free public</p>
           <h3>Ad-supported</h3>
           <p class="price">$0</p>
-          <p>No login for Market, News, JAMSEC, Dilution, Stock Card, and Research. Read-only. ${LOCK} Squawk is not included on these pages. Standard Terms, Privacy, and the risk disclosure apply.</p>
+          <p>No login for Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research. Read-only. ${LOCK} Squawk is not included on these pages. Standard Terms, Privacy, and the risk disclosure apply.</p>
         </article>
         <article class="card">
           <p class="tier-note">Paid monthly</p>
           <h3>Per account</h3>
           <p class="price">$29.99 <span>/ month</span></p>
-          <p>Custom filtering, saved filter presets, the journal, and ad-free Squawk after the 7-day Squawk trial. No free trial of the subscription.</p>
+          <p>Interactive filter controls, custom filtering, saved filter presets, the journal, and ad-free Squawk after the 7-day Squawk trial. No free trial of the subscription.</p>
         </article>
         <article class="card">
           <p class="tier-note">Paid annual</p>
@@ -373,7 +377,11 @@ pages.push({
         </article>
         <article class="card">
           <h3><a href="features/#jamsec">JAMSEC</a></h3>
-          <p>A read-only public page. It uses the same locked filters. It is not a signal and it is not advice.</p>
+          <p>A read-only public page. It uses the same $1–$50 and float under 40M lock. It is not a trading signal and it is not advice.</p>
+        </article>
+        <article class="card">
+          <h3><a href="features/#signals">Signals</a></h3>
+          <p>Locked to Price Spike Up and Price Spike Down at 5%, on stocks from $1–$50 with float under 40M. The preset cannot be changed.</p>
         </article>
         <article class="card">
           <h3><a href="research/#dilution">Dilution</a></h3>
@@ -388,8 +396,8 @@ pages.push({
           <p>Read-only research notes. This site does not publish the outcome of a study.</p>
         </article>
         <article class="card">
-          <h3><a href="features/#filters">Locked filters</a></h3>
-          <p>${LOCK}</p>
+          <h3><a href="features/#filters">Locked presets</a></h3>
+          <p>Free visitors see only the locked presets. They cannot change or customize filters. Interactive filter controls are paid.</p>
         </article>
       </div>
     </section>
@@ -400,7 +408,7 @@ pages.push({
       </div>
       <div class="band">
         <h2>What paid adds</h2>
-        <p>Paid unlocks custom filtering and saved filter presets, the journal, and ad-free Squawk. The journal is a unified trade journal, a P&amp;L calendar, and post-trade insight cards and reviews. All of that is scoped per user account. <a href="access/">Pricing and access</a></p>
+        <p>Paid unlocks the interactive filter controls, custom filtering, saved filter presets, the journal, and ad-free Squawk. The journal is a unified trade journal, a P&amp;L calendar, and post-trade insight cards and reviews. All of that is scoped per user account. <a href="access/">Pricing and access</a></p>
       </div>
     </section>
     <section class="section">
@@ -428,35 +436,37 @@ pages.push({
   crumb: "Features",
   title: "Features — Edge Trader Pro",
   description:
-    "Free public pages need no login: Market, News, JAMSEC, Dilution, Stock Card, and Research. A free account unlocks browser-based Squawk for the first 7 days. Paid adds custom filters, saved presets, the journal, and ad-free Squawk.",
+    "Free public pages need no login: Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research. Signals is locked to a 5% price spike on $1–$50 names with float under 40M. Custom filters are paid. A free account unlocks Squawk for the first 7 days.",
   body: `<div class="wrap">
     <header class="page-hero">
       <p class="kicker">Launch</p>
       <h1>Features</h1>
-      <p class="lede" style="margin-left:0">Market, News, JAMSEC, Dilution, Stock Card, and Research are $0, need no login, and are ad-supported. A free account unlocks browser-based Squawk for the first 7 days. Paid is $29.99/month or $259/year, a 25-user launch, with no free trial of the subscription. Nothing here is a performance claim.</p>
+      <p class="lede" style="margin-left:0">Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research are $0, need no login, and are ad-supported. Every free view is locked to $1–$50 and float under 40M. Signals is locked to Price Spike Up and Price Spike Down at 5%. Visitors cannot change those filters. A free account unlocks browser-based Squawk for the first 7 days. Paid is $29.99/month or $259/year, a 25-user launch, with no free trial of the subscription. Nothing here is a performance claim.</p>
     </header>
     <article class="prose">
       <h2>Free public tier</h2>
-      <p>Market, News, JAMSEC, Dilution, Stock Card, and Research are a strict read-only experience. You do not sign in for those pages. Standard <a href="../terms/">Terms</a>, <a href="../privacy/">Privacy</a>, and the risk disclosure apply. ${DISCLAIMER}</p>
+      <p>Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research are a strict read-only experience. You do not sign in for those pages. Standard <a href="../terms/">Terms</a>, <a href="../privacy/">Privacy</a>, and the risk disclosure apply. ${DISCLAIMER}</p>
       <h2 id="market">Market</h2>
       <p>Market is a public page: index cards, market headlines, a theme heat map, a sector ETF heat map, and industry tiles for pharma, biotech, semiconductors, regional banks, oil and gas, and gold miners. A bull and bear ETF tape sits with them. A tile can show Favors shorts, Favors longs, or Neutral. That pill is context, not a signal. A change under half a percent reads Neutral. Bear funds flip the read, because a rise in the bear fund means the sector is falling.</p>
       <p>A tile can show a delayed tag when the quote is delayed, or a cached tag when the value is cached. <a href="../market/">Market page</a></p>
       <h2 id="news">News</h2>
       <p>News is a public page. A headline opens a reader with the feed summary, a Why It's Moving note, and a link to the original. The free tier does not add custom news filters. A field with no feed stays n/a.</p>
       <h2 id="jamsec">JAMSEC</h2>
-      <p>JAMSEC is a public page on the free desk. It is read-only and uses the same locked filters as the rest of that tier. A field with no feed stays n/a. This site does not describe JAMSEC as a signal or as advice.</p>
+      <p>JAMSEC is a public page on the free desk. It is read-only and uses the same $1–$50 and float under 40M lock as the rest of that tier. A field with no feed stays n/a. This site does not describe JAMSEC as a trading signal or as advice.</p>
+      <h2 id="signals">Signals</h2>
+      <p>Signals is a free public page. It is locked to Price Spike Up and Price Spike Down at 5%, and only on stocks from $1–$50 with float under 40M. The same $1–$50 and float under 40M lock applies on every free public view. A free visitor cannot change that preset. A price spike on this page is not investment advice. A field with no feed stays n/a, and a delayed or cached value can wear that tag.</p>
       <h2 id="research">Dilution, Stock Card, and Research</h2>
       <p>Dilution, Stock Card, and Research are public, read-only pages. Dilution can show a risk bar and a score from 0 to 100, with offering math, and a PDF download. The stock card shows the symbol you open. Research notes stay on the page. Cells without a feed stay grey or n/a. A connected feed that is failing stays marked as failing. <a href="../research/">Research page</a></p>
       <h2 id="squawk">Browser-based Squawk</h2>
       <p>Squawk is not one of the no-login pages. Free users must create a free account to access the 7-day Squawk trial. That account unlocks browser-based Squawk for the first 7 days. Squawk can be switched on or off, with a volume control, and it reads chosen headlines and market alerts. It does not read a feed that is missing as if the item were present.</p>
       <p>After 7 days, Squawk requires the paid tier at $29.99/month or $259/year, and paid Squawk is ad-free, scoped to the user account. The 7-day window is only for Squawk. The paid subscription has no free trial.</p>
-      <h2 id="filters">Locked filters</h2>
-      <p>${LOCK} The lock is applied on the server. The free desk does not offer a control that widens the price band or the float band, and it does not save a preset.</p>
+      <h2 id="filters">Locked presets</h2>
+      <p>${LOCK} The lock is applied on the server. The free desk does not offer a control that changes the price band, the float band, or the 5% spike preset, and it does not save a preset.</p>
       <h2 id="paid">Paid tier</h2>
       <p>Paid Monthly is $29.99/month. Paid Annual is $259/year. There is no free trial. Checkout goes straight to Stripe. The paid launch holds 25 users. Until a Stripe Payment Link is filled in, the buttons on the <a href="../access/">pricing page</a> email hello@edgetraderpro.com.</p>
       <p>Paid unlocks three things, each scoped per user account:</p>
       <ul>
-        <li>Custom filtering and saved filter presets.</li>
+        <li>Interactive filter controls, custom filtering, and saved filter presets.</li>
         <li>The journal: a unified trade journal, a P&amp;L calendar, and post-trade insight cards and reviews. See the <a href="../journal/">journal page</a>.</li>
         <li>Ad-free Squawk, required after the first 7 days.</li>
       </ul>
@@ -470,6 +480,7 @@ pages.push({
         ${shot("Market", "Placeholder for a later image of index cards and sector context. Not a performance chart.")}
         ${shot("News", "Placeholder for a later image of the news reader.")}
         ${shot("JAMSEC", "Placeholder for a later image of JAMSEC. Not a signal board.")}
+        ${shot("Signals", "Placeholder for a later image of Price Spike Up and Price Spike Down at 5%. The preset is locked.")}
         ${shot("Squawk trial", "Placeholder for a later image of browser-based Squawk. A free account is required, and access lasts 7 days.")}
         ${shot("Dilution and Stock Card", "Placeholder for a later image of the research cards. Figures in a future image are sample data.")}
         ${shot("Paid journal", "Placeholder for a later image of the journal, the P&amp;L calendar, and an insight card.")}
@@ -499,7 +510,7 @@ pages.push({
       <p>${DATA}</p>
       <h2 id="filters">The filter lock</h2>
       <p>${LOCK} Names outside that band are not opened up from the browser on the free tier.</p>
-      <p>Custom filtering and saved filter presets are paid, and they are stored on the user account. <a href="../access/">See pricing</a>.</p>
+      <p>Interactive filter controls, custom filtering, and saved filter presets are paid, and they are stored on the user account. <a href="../access/">See pricing</a>.</p>
       <div class="callout"><p>${DISCLAIMER}</p></div>
     </article>
     <section class="section">
@@ -572,7 +583,7 @@ pages.push({
       <aside class="panel card">
         <h2>Tags</h2>
         <p>${DATA}</p>
-        <p>Custom filtering of this research, and any saved preset, belongs to the paid account. The free pages stay on the locked band.</p>
+        <p>Interactive filter controls and any saved preset belong to the paid account. The free pages stay on the locked presets, including Price Spike Up and Price Spike Down at 5% on Signals.</p>
       </aside>
     </div>
     <section class="section">
@@ -626,7 +637,7 @@ pages.push({
     <header class="page-hero">
       <p class="kicker">Pricing</p>
       <h1>Pricing and access</h1>
-      <p class="lede" style="margin-left:0">Public pages are free and need no login. A free account unlocks browser-based Squawk for the first 7 days. After that, Squawk requires Paid and is ad-free. Paid goes straight to Stripe Checkout, with no free trial of the subscription. The paid launch holds 25 users. Payment Links are empty, so the paid buttons email hello@edgetraderpro.com until a link is filled in.</p>
+      <p class="lede" style="margin-left:0">Public pages are free and need no login. Every free view is locked to $1–$50 and float under 40M, and Signals is locked to Price Spike Up and Price Spike Down at 5%. Visitors cannot change those filters. A free account unlocks browser-based Squawk for the first 7 days. After that, Squawk requires Paid and is ad-free. Paid goes straight to Stripe Checkout, with no free trial of the subscription. The paid launch holds 25 users. Payment Links are empty, so the paid buttons email hello@edgetraderpro.com until a link is filled in.</p>
     </header>
     <div class="card-grid">
       <article class="card">
@@ -648,7 +659,7 @@ pages.push({
         <p class="price">$29.99 <span>/ month</span></p>
         <p>Straight to Stripe Checkout. No free trial. Paid Monthly is $29.99/month.</p>
         <ul class="plan-list">
-          <li>Custom filtering and saved filter presets</li>
+          <li>Interactive filter controls, custom filtering, and saved filter presets</li>
           <li>Journal: unified trade journal, P&amp;L calendar, and post-trade insight cards</li>
           <li>Ad-free Squawk, required after the first 7 days</li>
         </ul>
@@ -823,9 +834,9 @@ pages.push({
     <p class="draft-banner"><strong>Draft.</strong> These are working terms for the marketing site, not a final customer agreement. They will be updated when paid checkout is open.</p>
     <p>${DISCLAIMER}</p>
     <h2>The tiers</h2>
-    <p>Market, News, JAMSEC, Dilution, Stock Card, and Research are $0. They do not require a login. They are ad-supported and read-only. Filters on those pages are locked server-side to $1–$50 only and float under 40M. There are no custom filters and no saved presets on the free tier.</p>
+    <p>Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research are $0. They do not require a login. They are ad-supported and read-only. ${LOCK}</p>
     <p>Browser-based Squawk is not on those pages. Free users must create a free account to access the 7-day Squawk trial. After 7 days, Squawk requires Paid and is ad-free. That window is only for Squawk.</p>
-    <p>Paid Monthly is $29.99/month. Paid Annual is $259/year. The paid launch holds 25 users. There is no free trial of the subscription. Checkout goes straight to Stripe when a Payment Link is filled in. Until then, the button emails hello@edgetraderpro.com and you are not charged by this website. Paid unlocks custom filtering, saved filter presets, the journal, and ad-free Squawk, each scoped to the user account.</p>
+    <p>Paid Monthly is $29.99/month. Paid Annual is $259/year. The paid launch holds 25 users. There is no free trial of the subscription. Checkout goes straight to Stripe when a Payment Link is filled in. Until then, the button emails hello@edgetraderpro.com and you are not charged by this website. Paid unlocks the interactive filter controls, custom filtering, saved filter presets, the journal, and ad-free Squawk, each scoped to the user account.</p>
     <h2>The website</h2>
     <p>The pages describe Edge Trader Pro. They are informational. A description of a feature is not a promise that a particular feed is connected on a particular day. Standard Terms, Privacy, and the risk disclosure apply to both tiers.</p>
     <h2>Your decisions</h2>
