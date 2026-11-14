@@ -68,7 +68,7 @@ window.ETPKnowledge = [
   },
   {
     keywords: ["price", "pricing", "cost", "pay", "payment", "stripe", "waitlist", "access", "checkout", "buy", "month", "year", "trial", "29", "69", "297", "497"],
-    answer: "Market, News, JAMSEC, Dilution, Stock Card, and Research are $0 and need no login. A free account unlocks browser-based Squawk for the first 7 days. After 7 days, Squawk requires Paid and is ad-free. Paid is $29/month or $297/year for a limited time, regularly $69/month or $497/year. Continue to Paid Monthly and Continue to Paid Annual open https://app.edgedashpro.com/pricing, straight to Stripe Checkout. There is no free trial of the subscription. Questions about a plan go to hello@edgedashpro.com.",
+    answer: "Market, News, JAMSEC, Dilution, Stock Card, and Research are $0 and need no login. A free account unlocks browser-based Squawk for the first 7 days. After 7 days, Squawk requires Paid and is ad-free. Paid is $29/month or $297/year for a limited time, regularly $69/month or $497/year. There is no free trial of the subscription. Questions about a plan go to hello@edgedashpro.com.",
     more: { slug: "access/", label: "Pricing" }
   },
   {

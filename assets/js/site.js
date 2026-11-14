@@ -24,13 +24,6 @@
           el.removeAttribute("target");
         }
       }
-      var note = document.querySelector('[data-checkout-note="' + slot + '"]');
-      if (note && resolved.via === "stripe") {
-        note.textContent =
-          "Opens " +
-          resolved.href +
-          " in a new tab. Straight to Stripe Checkout. There is no free trial of the subscription.";
-      }
     });
   }
 

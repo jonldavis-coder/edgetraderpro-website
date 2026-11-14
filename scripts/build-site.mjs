@@ -109,7 +109,6 @@ function pricingCards() {
           <li>Ad-free Squawk, required after the first 7 days</li>
           <li>Scoped per user account</li>
         </ul>
-        <p class="fine">Continue to Paid Monthly and Continue to Paid Annual open <a href="${CHECKOUT}">${CHECKOUT}</a>.</p>
         <div class="plan-actions">
           <a class="btn btn-primary" data-checkout="paidMonthly" href="${CHECKOUT}">Continue to Paid Monthly</a>
           <a class="btn btn-ghost" data-checkout="paidAnnual" href="${CHECKOUT}">Continue to Paid Annual</a>
@@ -153,7 +152,7 @@ const faq = [
   },
   {
     q: "How do I get access, and what does it cost?",
-    a: "The free public tier is $0 and needs no checkout. " + OFFER + " Continue to Paid Monthly and Continue to Paid Annual open https://app.edgedashpro.com/pricing, straight to Stripe Checkout. Questions about a plan go to hello@edgedashpro.com."
+    a: "The free public tier is $0 and needs no checkout. " + OFFER + " Questions about a plan go to hello@edgedashpro.com."
   },
   {
     q: "Does the free tier show ads?",
@@ -502,7 +501,7 @@ pages.push({
       <h2 id="filters">Locked presets</h2>
       <p>${LOCK} The lock is applied on the server. The free desk does not offer a control that changes the price band, the float band, or the 5% spike preset, and it does not save a preset.</p>
       <h2 id="paid">Paid tier</h2>
-      <p>Paid Monthly is $29/month for a limited time, regularly $69/month. Paid Annual is $297/year for a limited time, regularly $497/year. There is no free trial of the subscription. Continue to Paid Monthly and Continue to Paid Annual open <a href="${CHECKOUT}">https://app.edgedashpro.com/pricing</a>, straight to Stripe Checkout. Questions about a plan go to hello@edgedashpro.com.</p>
+      <p>Paid Monthly is $29/month for a limited time, regularly $69/month. Paid Annual is $297/year for a limited time, regularly $497/year. There is no free trial of the subscription. Questions about a plan go to hello@edgedashpro.com.</p>
       <p>Paid unlocks, each scoped per user account:</p>
       <ul>
         <li>Interactive filter controls, custom filtering, and saved filter presets.</li>
@@ -608,7 +607,7 @@ pages.push({
   crumb: "Pricing",
   title: "Pricing — EdgeDashPro",
   description:
-    "EdgeDashPro pricing: free public tier $0. Paid is $29/month or $297/year for a limited time, regularly $69/month or $497/year. No free trial. Paid buttons open https://app.edgedashpro.com/pricing.",
+    "EdgeDashPro pricing: free public tier $0. Paid is $29/month or $297/year for a limited time, regularly $69/month or $497/year. No free trial.",
   extraGraph: [
     {
       "@type": "Product",
@@ -652,7 +651,6 @@ pages.push({
         <h2>Questions before you subscribe</h2>
         <p>Email hello@edgedashpro.com if you have a question about a plan. This site does not promise a response time. You are not charged by this marketing website. Do not include account numbers, passwords, or API keys.</p>
         <p><a class="btn btn-ghost" data-checkout="waitlist" href="${MAILTO}">Email hello@edgedashpro.com</a></p>
-        <p class="fine" data-checkout-note="waitlist">This opens an email to hello@edgedashpro.com.</p>
         <p class="fine"><a href="../checkout-canceled/">Checkout canceled</a> · <a href="../thank-you/">Thank you</a></p>
       </div>
     </section>
@@ -776,7 +774,7 @@ pages.push({
     <h2>The automated assistant</h2>
     <p>The assistant runs in your browser. Your question is matched against text that shipped with this website. The page does not send that question to another service.</p>
     <h2>Checkout</h2>
-    <p>Continue to Paid Monthly and Continue to Paid Annual open https://app.edgedashpro.com/pricing. Checkout there is handled by Stripe. There is no free trial of the subscription. This marketing site does not store a card number. The email link on the pricing page opens a message to hello@edgedashpro.com instead.</p>
+    <p>Paid checkout is handled by Stripe in the app. There is no free trial of the subscription. This marketing site does not store a card number. Questions about a plan go to hello@edgedashpro.com.</p>
     <h2>Cookies</h2>
     <p>This marketing site does not set a tracking cookie for advertising. Your browser may store nothing from us. The host may use its own technical cookies.</p>
     <h2>Children</h2>
@@ -803,7 +801,7 @@ pages.push({
     <h2>The tiers</h2>
     <p>Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research are $0. They do not require a login. They are ad-supported and read-only. ${LOCK}</p>
     <p>Browser-based Squawk is not on those pages. Free users must create a free account to access the 7-day Squawk trial. After 7 days, Squawk requires Paid and is ad-free. That window is only for Squawk.</p>
-    <p>Paid Monthly is $29/month for a limited time, regularly $69/month. Paid Annual is $297/year for a limited time, regularly $497/year. There is no free trial of the subscription. Continue to Paid Monthly and Continue to Paid Annual open https://app.edgedashpro.com/pricing, straight to Stripe Checkout. Questions about a plan go to hello@edgedashpro.com. You are not charged by this marketing website. Paid unlocks the interactive filter controls, custom filtering, saved filter presets, and ad-free Squawk, each scoped to the user account.</p>
+    <p>Paid Monthly is $29/month for a limited time, regularly $69/month. Paid Annual is $297/year for a limited time, regularly $497/year. There is no free trial of the subscription. Paid checkout is handled by Stripe in the app. Questions about a plan go to hello@edgedashpro.com. You are not charged by this marketing website. Paid unlocks the interactive filter controls, custom filtering, saved filter presets, and ad-free Squawk, each scoped to the user account.</p>
     <h2>The website</h2>
     <p>The pages describe EdgeDashPro. They are informational. A description of a feature is not a promise that a particular feed is connected on a particular day. Standard Terms, Privacy, and the risk disclosure apply to both tiers.</p>
     <h2>Your decisions</h2>

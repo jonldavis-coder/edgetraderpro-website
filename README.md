@@ -10,7 +10,7 @@ There are two tiers:
 
 - Free public pages: $0, no login, ad-supported, and read-only. Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research. Every free view is locked server-side to $1–$50 only and float under 40M. Signals is locked to Price Spike Up and Price Spike Down at 5%. Visitors cannot change or customize filters.
 - Squawk: a free account is required. Browser-based Squawk lasts for the first 7 days. After that, Squawk requires Paid and is ad-free.
-- Paid: $29/month or $297/year for a limited time, regularly $69/month or $497/year. No free trial of the subscription. Continue to Paid Monthly and Continue to Paid Annual open https://app.edgedashpro.com/pricing. Questions go to hello@edgedashpro.com.
+- Paid: $29/month or $297/year for a limited time, regularly $69/month or $497/year. No free trial of the subscription. The paid buttons link to https://app.edgedashpro.com/pricing. Questions go to hello@edgedashpro.com.
 
 ## Pages
 
