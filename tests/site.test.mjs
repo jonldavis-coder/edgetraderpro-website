@@ -286,3 +286,15 @@ test("published copy uses EdgeDashPro and hello@edgedashpro.com", () => {
   assert.match(favicon, /aria-label="EDP"/);
   assert.doesNotMatch(favicon, /monogram/i);
 });
+
+test("each HTML page includes the EdgeDashPro GA4 tag once", () => {
+  const htmlFiles = files.filter((file) => file.endsWith(".html"));
+  for (const file of htmlFiles) {
+    const html = readFileSync(file, "utf8");
+    const rel = relative(ROOT, file);
+    const srcHits = html.split("https://www.googletagmanager.com/gtag/js?id=G-BWWCMCNW12").length - 1;
+    const cfgHits = html.split("gtag('config', 'G-BWWCMCNW12')").length - 1;
+    assert.equal(srcHits, 1, rel);
+    assert.equal(cfgHits, 1, rel);
+  }
+});
