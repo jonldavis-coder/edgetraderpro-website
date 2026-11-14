@@ -1,16 +1,17 @@
-/* Stripe Payment Link slots for Edge Trader Pro.
-   Leave a slot as an empty string and the button falls back to email.
+/* Checkout slots for EdgeDashPro.
+   paidMonthly and paidAnnual open the app pricing page.
+   Leave waitlist as an empty string and that button falls back to email.
    Do not put secrets, account numbers, or prices in this file. */
 (function (global) {
   var config = {
-    contactEmail: "hello@edgetraderpro.com",
+    contactEmail: "hello@edgedashpro.com",
     mailto:
-      "mailto:hello@edgetraderpro.com?subject=" +
-      encodeURIComponent("Edge Trader Pro — request access"),
+      "mailto:hello@edgedashpro.com?subject=" +
+      encodeURIComponent("EdgeDashPro — request access"),
     stripePaymentLinks: {
-      access: "",
-      waitlist: "",
-      customSetup: ""
+      paidMonthly: "https://app.edgedashpro.com/pricing",
+      paidAnnual: "https://app.edgedashpro.com/pricing",
+      waitlist: ""
     }
   };
 

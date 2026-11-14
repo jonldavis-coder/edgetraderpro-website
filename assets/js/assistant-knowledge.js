@@ -2,98 +2,98 @@
    The assistant does not load anything else. */
 window.ETPKnowledge = [
   {
-    keywords: ["what", "edge", "trader", "pro", "desk", "about", "product"],
-    answer: "Edge Trader Pro is a web desk for people who trade their own plan. The wordmark is Edge Trader Pro. The tagline is Your rules. Your data. Your desk. Today the desk includes linked charts and workspaces, saved multi-pane screeners with presets, filters, and watchlists, the paper practice simulator ProTrader MOSAIC, a trade journal with editable rows and post-trade reviews, news, configurable alerts, squawk, market and sector context, and rule and risk controls with research cards and dilution analysis.",
+    keywords: ["edge", "edgedashpro", "dash", "desk", "about", "product", "today"],
+    answer: "EdgeDashPro is a web desk for people who trade their own plan. The tagline is Your rules. Your data. Your desk. Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research are $0, need no login, and are ad-supported and read-only. Every free view is locked server-side to $1–$50 only and float under 40M. Signals is locked to Price Spike Up and Price Spike Down at 5%. Free visitors cannot change or customize filters. Browser-based Squawk is not on those pages. A free account unlocks Squawk for the first 7 days. After that, Squawk requires Paid and is ad-free. The paid subscription has no free trial.",
+    more: { slug: "features/", label: "Features" }
+  },
+  {
+    keywords: ["free", "public", "tier", "ad-supported", "read-only", "readonly"],
+    answer: "The free public pages are $0, need no login, and are ad-supported: Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research. They are read-only. Every free view is locked server-side to $1–$50 only and float under 40M. Signals is locked to Price Spike Up and Price Spike Down at 5%. Free visitors see only those locked presets and cannot change or customize filters. Browser-based Squawk is not included. A free account unlocks Squawk for the first 7 days only. The paid subscription has no free trial.",
     more: { slug: "features/", label: "Features" }
   },
   {
     keywords: ["advice", "invest", "investment", "risk", "loss", "guarantee", "disclaimer", "past", "results"],
-    answer: "Edge Trader Pro is not investment advice. Trading involves risk of loss. Past results do not guarantee future results. This site does not publish profit, loss, win rate, or customer results.",
+    answer: "EdgeDashPro is not investment advice. Trading involves risk of loss. Past results do not guarantee future results. This site does not publish profit, loss, win rate, or customer results.",
     more: { slug: "faq/", label: "FAQ" }
   },
   {
-    keywords: ["real-time", "realtime", "feed", "feeds", "delayed", "connected", "data", "quote", "n/a"],
-    answer: "This site does not describe the desk's data as universally connected or real-time. A field with no feed stays n/a. A quote that is delayed can show a delayed tag. Panels that are not connected stay grey. Some presets keep fields such as P/E, PEG, dividends, IPO date, depositary receipt, and technical rating as n/a when there is no feed.",
-    more: { slug: "features/", label: "Features" }
-  },
-  {
-    keywords: ["chart", "charts", "candle", "candles", "vwap", "macd", "volume", "workspace", "drawing"],
-    answer: "Charts use a dark quote layout with the company and last price, candles, VWAP, volume, and MACD, plus drawing tools. A color link ties a chart to scanner panes, news, and details that share that color. A workspace saves the chart layout, scanner panes, link colors, signal and news colors, and squawk switches. You can save, save as, rename, duplicate, delete, set a default, and export or import the workspace as JSON.",
-    more: { slug: "charts/", label: "Charts & Screeners" }
-  },
-  {
-    keywords: ["screener", "screeners", "scanner", "preset", "filter", "filters", "pane", "panes", "watchlist"],
-    answer: "Screeners run in one, two, three, or four panes. Each pane keeps its own preset, filters, tab, sort, and cooldown. Thirty-eight built-in screen presets ship with the desk. You can clone and edit a preset without replacing a built-in screen. Scanners save to the signed-in account. You can import a symbol list, including a TradingView export. Dated lists stay selectable. A name outside the price or float band can show an out-of-band tag when a quote or float is already cached.",
-    more: { slug: "charts/", label: "Charts & Screeners" }
-  },
-  {
-    keywords: ["mosaic", "practice", "simulator", "sim", "paper", "replay"],
-    answer: "ProTrader MOSAIC is the practice simulator. It is paper-only. You can replay a session on a chart with candles, volume, VWAP, and an EMA, plus estimated limit-up and limit-down bands, paper fills, and order lines. It can open in its own window. A paper fill is not a live order. The simulator does not send a live order.",
-    more: { slug: "practice/", label: "Practice" }
-  },
-  {
-    keywords: ["journal", "review", "reviews", "edit", "row", "rows", "trade journal"],
-    answer: "The current journal has editable rows and a reviews page for post-trade reviews. You keep the notes. The journal does not publish a profit figure on this website.",
-    more: { slug: "journal/", label: "Journal" }
-  },
-  {
-    keywords: ["roadmap", "calendar", "mae", "mfe", "mentor", "sharing", "broker", "import", "efficiency", "tag", "setup report"],
-    answer: "On the roadmap, and not in the current desk: broker execution import, automatic journal capture, entry and exit marked on charts, reports by setup, tag, time, and price, a journal calendar, sharing and mentoring, and MAE/MFE and exit-efficiency analytics. These are journal plans only. They are not available today.",
-    more: { slug: "journal/", label: "Journal" }
-  },
-  {
-    keywords: ["rule", "rules", "risk", "float", "stop", "short", "borrow", "hours", "setup", "limit"],
-    answer: "The desk shows risk rules: a $1 to $20 price band, float under 20 million shares, a share cap, a cap on open names, a daily loss limit, a stop on every trade, no short without a borrow, regular trading hours only, and a named setup. A rule on the screen does not remove market risk. Edge Trader Pro is not investment advice.",
-    more: { slug: "rules/", label: "Rules & Risk" }
-  },
-  {
-    keywords: ["dilution", "stock card", "research", "pdf", "scorecard", "offering"],
-    answer: "Research cards include a stock card and a dilution scorecard. Dilution can show a risk bar and a 0 to 100 score, plus offering math. You can download a PDF. The last symbol for the account reopens unless the address bar names one. Some research cells, including short interest and borrow and locate, stay grey until a feed is connected.",
-    more: { slug: "rules/", label: "Rules & Risk" }
-  },
-  {
-    keywords: ["news", "squawk", "alert", "alerts", "signal", "halt", "headline", "moving"],
-    answer: "News opens in an in-app reader with the feed summary, a Why It's Moving note, and the original link. A second news pane has its own filters. Squawk can read headlines and market alerts aloud, including Lost VWAP and Reclaimed VWAP. VWAP squawk starts off until you change it. Alerts are an inbox, a dilution feed, and rules. A signal is an alert row, not a trade. Halt up, halt down, and halt/resume are separate alert types.",
+    keywords: ["real-time", "realtime", "feed", "feeds", "delayed", "cached", "connected", "data", "quote", "n/a"],
+    answer: "This site does not describe the desk's data as universally connected or real-time. A field with no feed stays n/a. A delayed quote can wear a delayed tag. A cached value can wear a cached tag. Panels that are not connected stay grey.",
     more: { slug: "features/", label: "Features" }
   },
   {
     keywords: ["market", "sector", "heatmap", "heat", "etf", "context", "neutral"],
-    answer: "Market overview stacks index cards, headlines, a theme heat map, a sector ETF heat map, and industry tiles such as pharma, biotech, semiconductors, regional banks, oil and gas, and gold miners. A bull and bear ETF tape sits with them. A context pill can read Favors shorts, Favors longs, or Neutral. That pill is context, not a signal. A move under half a percent reads Neutral. A tile can show a delayed tag.",
+    answer: "Market is a free public page. It stacks index cards, headlines, a theme heat map, a sector ETF heat map, and industry tiles such as pharma, biotech, semiconductors, regional banks, oil and gas, and gold miners. A context pill can read Favors shorts, Favors longs, or Neutral. That pill is context, not a signal. A move under half a percent reads Neutral. A tile can show a delayed tag or a cached tag.",
+    more: { slug: "market/", label: "Market" }
+  },
+  {
+    keywords: ["news", "headline", "headlines", "reader", "moving"],
+    answer: "News is a free public page. A headline can open a reader with the feed summary, a Why It's Moving note, and a link to the original. A field with no feed stays n/a. News on the free tier is read-only.",
     more: { slug: "features/", label: "Features" }
   },
   {
-    keywords: ["price", "pricing", "cost", "pay", "payment", "stripe", "waitlist", "access", "checkout", "buy"],
-    answer: "Pricing is not set. Request access or join the waitlist by emailing hello@edgetraderpro.com. Stripe Payment Link slots on this site are empty, so the access buttons open that email. Custom setup services are available. Contact us. No price is listed for setup.",
-    more: { slug: "access/", label: "Access" }
+    keywords: ["jamsec", "jam"],
+    answer: "JAMSEC is a free public page. It is read-only, with the same locked filters as the rest of the free tier: $1–$50 only and float under 40M. A field with no feed stays n/a. JAMSEC is not a trading signal and it is not advice.",
+    more: { slug: "features/", label: "Features" }
   },
   {
-    keywords: ["custom", "setup", "service", "services", "contact", "email", "hello"],
-    answer: "Custom setup services are available. Contact us at hello@edgetraderpro.com. No price is listed. Do not send account numbers, passwords, or API keys.",
-    more: { slug: "contact/", label: "Contact" }
+    keywords: ["filter", "filters", "filtering", "preset", "presets", "saved", "custom", "band", "float", "locked", "server", "interactive", "customize"],
+    answer: "Every free public view is locked server-side to $1–$50 only and float under 40M. Signals is locked to Price Spike Up and Price Spike Down at 5% on those stocks. Free visitors see only those locked presets. They cannot change or customize filters. Interactive filter controls, custom filtering, and saved filter presets are paid and scoped to the user account. The paid subscription has no free trial.",
+    more: { slug: "market/", label: "Market" }
   },
   {
-    keywords: ["support", "help", "broken", "question"],
-    answer: "Support is by email at hello@edgetraderpro.com. This site does not promise a response time. Say what you were doing and what you expected. Do not include account numbers, passwords, or API keys.",
-    more: { slug: "support/", label: "Support" }
+    keywords: ["signal", "signals", "spike", "spikes"],
+    answer: "Signals is a free public view and needs no login. It is locked to Price Spike Up and Price Spike Down at 5%, on stocks from $1–$50 with float under 40M. The same $1–$50 and float under 40M lock applies on every free public view. Free visitors see only that locked preset and cannot change or customize filters. Interactive filter controls are paid. A price spike on Signals is not investment advice.",
+    more: { slug: "features/", label: "Features" }
   },
   {
-    keywords: ["place", "trades", "trade for me", "orders", "live order", "brokerage"],
-    answer: "No. You use the desk yourself. ProTrader MOSAIC is a paper practice simulator and does not send a live order. The journal records what you enter. This website does not offer a service that buys or sells for you.",
+    keywords: ["squawk", "audio", "aloud", "voice", "ad-free", "days", "7", "trial"],
+    answer: "Browser-based Squawk is not on the no-login pages. Free users must create a free account to access the 7-day Squawk trial. It can be switched on or off, with a volume control, and it reads chosen headlines and market alerts. After 7 days, Squawk requires the paid tier at $29.99/month or $259/year and is ad-free. That window is only for Squawk. The paid subscription has no free trial.",
+    more: { slug: "features/", label: "Features" }
+  },
+  {
+    keywords: ["journal", "review", "reviews", "calendar", "insight", "insights", "pnl", "trade journal"],
+    answer: "The journal is a paid feature, scoped to the user account. It is a unified trade journal, a profit and loss calendar, and post-trade insight cards and reviews. The free public tier does not include the journal. The journal does not publish a profit figure on this website.",
+    more: { slug: "journal/", label: "Journal" }
+  },
+  {
+    keywords: ["dilution", "scorecard", "offering", "pdf"],
+    answer: "Dilution is a free public page. It can show a risk bar and a score from 0 to 100, with offering math, and a PDF download. A field with no feed stays n/a. Dilution is not a recommendation.",
+    more: { slug: "research/", label: "Research" }
+  },
+  {
+    keywords: ["stock card", "stock", "card", "research", "write-up", "writeup"],
+    answer: "Stock Card and Research are free public pages. They are read-only. Cells without a feed stay grey or n/a. A connected feed that is failing stays marked as failing. A research note is not a recommendation, and this site does not publish the outcome of a study.",
+    more: { slug: "research/", label: "Research" }
+  },
+  {
+    keywords: ["price", "pricing", "cost", "pay", "payment", "stripe", "waitlist", "access", "checkout", "buy", "month", "year", "trial", "29", "259"],
+    answer: "Market, News, JAMSEC, Dilution, Stock Card, and Research are $0 and need no login. A free account unlocks browser-based Squawk for the first 7 days. After 7 days, Squawk requires Paid and is ad-free. Paid Monthly is $29.99/month and Paid Annual is $259/year. Continue to Paid Monthly and Continue to Paid Annual open https://app.edgedashpro.com/pricing, straight to Stripe Checkout. There is no free trial of the subscription. The paid launch holds 25 users. The waitlist button emails hello@edgedashpro.com.",
+    more: { slug: "access/", label: "Pricing" }
+  },
+  {
+    keywords: ["paid", "unlock", "unlocks", "include", "includes", "subscription", "monthly", "annual", "account"],
+    answer: "Paid is $29.99/month or $259/year, scoped per user account. It unlocks the interactive filter controls, custom filtering, saved filter presets, the journal (a unified trade journal, a profit and loss calendar, and post-trade insight cards and reviews), and ad-free Squawk. Free visitors cannot change the locked presets. Ad-free Squawk is required after the first 7 days. There is no free trial of the subscription. A free account is only the 7-day Squawk trial. The paid launch holds 25 users.",
+    more: { slug: "access/", label: "Pricing" }
+  },
+  {
+    keywords: ["login", "signin", "sign-in", "no login", "account"],
+    answer: "Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research do not require a login. Those views stay on locked presets, and the filters cannot be changed. Browser-based Squawk does require an account: create a free account to use it for the first 7 days. After 7 days, Squawk requires the paid tier and is ad-free. The paid subscription has no free trial. This marketing site does not create that account in the browser.",
+    more: { slug: "access/", label: "Pricing" }
+  },
+  {
+    keywords: ["place", "trades", "trade for me", "brokerage", "buy for me", "sell for me"],
+    answer: "No. You use the desk yourself. EdgeDashPro does not buy or sell for you. It is not a brokerage. The journal records what you enter on the paid account.",
     more: { slug: "faq/", label: "FAQ" }
   },
   {
-    keywords: ["assistant", "chat", "privacy", "cookie", "cookies", "data collection"],
-    answer: "The automated assistant runs in your browser and answers from this website only. It does not send your question to another service. This marketing site does not run its own analytics and does not ask you to create an account. Email you choose to send goes to hello@edgetraderpro.com. Privacy and terms pages are drafts.",
+    keywords: ["support", "help", "broken", "question", "contact", "email", "hello"],
+    answer: "Email hello@edgedashpro.com. This site does not promise a response time. Say what you were doing and what you expected. Do not include account numbers, passwords, or API keys.",
+    more: { slug: "support/", label: "Support" }
+  },
+  {
+    keywords: ["assistant", "chat", "privacy", "cookie", "cookies", "terms", "policy"],
+    answer: "The automated assistant runs in your browser and answers from this website only. It does not send your question to another service. This marketing site does not ask you to create an account. The free product tier is ad-supported. Privacy and terms pages are drafts. EdgeDashPro is not investment advice.",
     more: { slug: "privacy/", label: "Privacy" }
-  },
-  {
-    keywords: ["demo", "tape", "signin", "sign-in", "login", "ipad", "workspace save"],
-    answer: "The sign-in page carries the e/T pro mark. An admin can switch the desk tape to a demo tape. Demo adds a banner, and the desk asks before the switch. Layouts adapt on iPad: scanner panes stack when needed, and a saved chart layout is left as it is. A long idle period signs you out.",
-    more: { slug: "features/", label: "Features" }
-  },
-  {
-    keywords: ["mission", "status", "kcurve", "playbook", "training", "library"],
-    answer: "Mission Control opens a desk overview with session gauges, a pre-flight list, and tiles into the rest of the desk. A status board reports component health. A feed that is not configured stays grey. A signed-in training library, kCURVE, holds a curated reading list and the playbook. Those files open only after sign-in.",
-    more: { slug: "features/", label: "Features" }
   }
 ];

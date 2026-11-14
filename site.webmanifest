@@ -1,7 +1,8 @@
 {
-  "name": "Edge Trader Pro",
-  "short_name": "Edge Trader Pro",
-  "start_url": "./",
+  "name": "EdgeDashPro",
+  "short_name": "EdgeDashPro",
+  "id": "https://edgedashpro.com/",
+  "start_url": "https://edgedashpro.com/",
   "display": "browser",
   "background_color": "#07142e",
   "theme_color": "#07142e",
