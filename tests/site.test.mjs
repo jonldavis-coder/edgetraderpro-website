@@ -139,9 +139,13 @@ test("journal is the paid account journal", () => {
 test("pricing page states both tiers, Stripe slots, and no free trial", () => {
   const html = readFileSync(join(ROOT, "access/index.html"), "utf8");
   assert.match(html, /\$0/);
-  assert.match(html, /\$29\.99\/month/);
-  assert.match(html, /\$259\/year/);
-  assert.match(html, /25-user launch/);
+  assert.match(html, /\$69\/month/);
+  assert.match(html, /\$29\/month/);
+  assert.match(html, /\$497\/year/);
+  assert.match(html, /\$297\/year/);
+  assert.match(html, /Limited-time offer/);
+  assert.match(html, /<s class="price-was">\$69\/month<\/s>/);
+  assert.match(html, /<s class="price-was">\$497\/year<\/s>/);
   assert.match(html, /no free trial/i);
   assert.match(html, /data-checkout="paidMonthly"/);
   assert.match(html, /data-checkout="paidAnnual"/);
@@ -151,6 +155,23 @@ test("pricing page states both tiers, Stripe slots, and no free trial", () => {
   assert.match(html, /server-side/);
   assert.match(html, /not investment advice/);
   assert.doesNotMatch(html, /Pricing is not set/);
+  assert.doesNotMatch(html, /\$29\.99/);
+  assert.doesNotMatch(html, /\$259/);
+  assert.doesNotMatch(html, /25-user launch/);
+});
+
+test("published copy has no limited-seat language", () => {
+  const pattern = /25[- ]user|25 subscribers|launch cohort|limited[- ]seat|cohort of 25|holds 25|capped at 25/i;
+  const hits = [];
+  for (const file of files) {
+    const text = readFileSync(file, "utf8");
+    if (pattern.test(text)) hits.push(relative(ROOT, file));
+  }
+  for (const file of ["scripts/build-site.mjs", "README.md"]) {
+    const text = readFileSync(join(ROOT, file), "utf8");
+    if (pattern.test(text)) hits.push(file);
+  }
+  assert.deepEqual(hits, []);
 });
 
 test("free Signals and filters are locked presets", () => {

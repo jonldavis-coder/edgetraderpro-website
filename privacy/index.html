@@ -31,13 +31,13 @@
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="../">
-        <span class="brand-name">EdgeDashPro</span>
+        <span class="brand-name">EdgeDash<span class="brand-pro">Pro</span></span>
       </a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
       <nav class="site-nav" id="site-nav" aria-label="Primary">
-        <a href="../features/">Features</a><a href="../market/">Market</a><a href="../journal/">Journal</a><a href="../research/">Research</a><a href="../faq/">FAQ</a>
-        <a class="btn btn-primary header-cta" href="../access/">Pricing</a>
+        <a href="../features/">Features</a><a href="../market/">Market</a><a href="../research/">Research</a><a href="../access/">Pricing</a><a href="../faq/">FAQ</a>
       </nav>
+      <a class="btn btn-primary header-cta" href="https://app.edgedashpro.com">Start free</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     </div>
   </header>
   <main id="content">
@@ -50,7 +50,7 @@
       <p class="kicker">Draft</p>
       <h1>Privacy</h1>
     </header>
-    <p class="draft-banner"><strong>Draft.</strong> This is a working notice for the marketing site, not a final privacy policy. It will be replaced when paid checkout is open.</p>
+    <p class="draft-banner"><strong>Draft.</strong> This is a working notice for the marketing site, not a final privacy policy.</p>
     <p>EdgeDashPro can be reached at hello@edgedashpro.com. This page describes the marketing website, and it names how the product tiers differ.</p>
     <h2>What this site collects</h2>
     <p>You do not create an account on this marketing site. Market, News, JAMSEC, Dilution, Stock Card, and Research do not require a login. Browser-based Squawk does: a free account in the product unlocks it for the first 7 days, and after that Squawk requires a paid account. That account is part of the product, not a form on these pages. If you email us, we receive what you chose to send, including your address and the message. Do not send account numbers, passwords, or API keys.</p>
@@ -60,7 +60,7 @@
     <h2>The automated assistant</h2>
     <p>The assistant runs in your browser. Your question is matched against text that shipped with this website. The page does not send that question to another service.</p>
     <h2>Checkout</h2>
-    <p>Continue to Paid Monthly and Continue to Paid Annual open https://app.edgedashpro.com/pricing. Checkout there is handled by Stripe. There is no free trial of the subscription. This marketing site does not store a card number. The waitlist button opens an email to hello@edgedashpro.com instead.</p>
+    <p>Paid checkout is handled by Stripe in the app. There is no free trial of the subscription. This marketing site does not store a card number. Questions about a plan go to hello@edgedashpro.com.</p>
     <h2>Cookies</h2>
     <p>This marketing site does not set a tracking cookie for advertising. Your browser may store nothing from us. The host may use its own technical cookies.</p>
     <h2>Children</h2>
@@ -70,16 +70,19 @@
   </div>
   </main>
   <footer class="site-footer">
-    <div class="wrap">
-      <p class="disclaimer"><strong>Risk.</strong> EdgeDashPro is not investment advice. Trading involves risk of loss. Past results do not guarantee future results.</p>
-      <div class="footer-grid">
-        <p class="fine" style="margin:0">EdgeDashPro · Your rules. Your data. Your desk.</p>
-        <ul class="footer-links"><li><a href="../">Home</a></li><li><a href="../features/">Features</a></li><li><a href="../market/">Market</a></li><li><a href="../journal/">Journal</a></li><li><a href="../research/">Research</a></li><li><a href="../access/">Pricing</a></li><li><a href="../faq/">FAQ</a></li><li><a href="../support/">Support</a></li><li><a href="../contact/">Contact</a></li><li><a href="../privacy/">Privacy</a></li><li><a href="../terms/">Terms</a></li><li><a href="../sitemap/">Site map</a></li></ul>
+    <div class="wrap footer-layout">
+      <div class="footer-brand">
+        <p class="brand-name">EdgeDash<span class="brand-pro">Pro</span></p>
+        <p class="footer-tag">Your rules. Your data. Your desk.</p>
+        <p class="fine"><a href="mailto:hello@edgedashpro.com">hello@edgedashpro.com</a></p>
       </div>
-      <p class="legal-note">Public pages are $0, with no login, and ad-supported. A free account unlocks browser-based Squawk for the first 7 days. After that, Squawk requires Paid. Paid is $29.99 a month or $259 a year, a 25-user launch, with no free trial of the subscription. Continue to Paid Monthly and Continue to Paid Annual open https://app.edgedashpro.com/pricing, straight to Stripe Checkout. The waitlist button emails hello@edgedashpro.com. Screenshot frames are placeholders. © 2026 EdgeDashPro.</p>
+      <div class="footer-col"><p class="footer-heading">Product</p><ul class="footer-links"><li><a href="../features/">Features</a></li><li><a href="../market/">Market</a></li><li><a href="../research/">Research</a></li><li><a href="../access/">Pricing</a></li></ul></div><div class="footer-col"><p class="footer-heading">Help</p><ul class="footer-links"><li><a href="../faq/">FAQ</a></li><li><a href="../support/">Support</a></li><li><a href="../contact/">Contact</a></li></ul></div><div class="footer-col"><p class="footer-heading">Legal</p><ul class="footer-links"><li><a href="../privacy/">Privacy</a></li><li><a href="../terms/">Terms</a></li><li><a href="../sitemap/">Site map</a></li></ul></div>
     </div>
-  </footer>
-  <div class="assistant">
+    <div class="wrap footer-bottom">
+      <p class="disclaimer"><strong>Not investment advice.</strong> EdgeDashPro is not investment advice. Trading involves risk of loss. Past results do not guarantee future results.</p>
+      <div class="footer-end">
+        <p class="legal-note">© 2026 EdgeDashPro</p>
+        <div class="assistant">
     <div id="assistant-panel" class="assistant-panel" role="dialog" aria-labelledby="assistant-title" aria-modal="true" hidden>
       <div class="assistant-head">
         <div>
@@ -102,10 +105,13 @@
       </form>
     </div>
     <button class="assistant-toggle" type="button" aria-expanded="false" aria-controls="assistant-panel">
-      <small>Ask</small>
-      <strong>Automated assistant</strong>
+      Ask
+      <span class="sr-only">Automated assistant</span>
     </button>
-  </div>
+        </div>
+      </div>
+    </div>
+  </footer>
   <script src="../assets/js/checkout-config.js"></script>
   <script src="../assets/js/assistant-knowledge.js"></script>
   <script src="../assets/js/site.js"></script>
