@@ -3,6 +3,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
+const GA_ID = "G-BWWCMCNW12";
 const BASE = "https://edgedashpro.com";
 const APP = "https://app.edgedashpro.com";
 const CHECKOUT = "https://app.edgedashpro.com/pricing";
@@ -304,6 +305,14 @@ function layout(page) {
   <link rel="manifest" href="${pre}site.webmanifest">
   <link rel="stylesheet" href="${pre}assets/css/site.css">
   <script type="application/ld+json">${json}</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=${GA_ID}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${GA_ID}');
+  </script>
 </head>
 <body data-root="${pre}">
   <a class="skip" href="#content">Skip to content</a>
