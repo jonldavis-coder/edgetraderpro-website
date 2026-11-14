@@ -106,7 +106,7 @@
     if (!best || bestScore < 4) {
       return {
         answer:
-          "I can only answer from the pages on this website, and I don't see a clear match. Try Features, the Journal, Access, or the FAQ, or email hello@edgedashpro.com.",
+          "I can only answer from the pages on this website, and I don't see a clear match. Try Features, Pricing, or the FAQ, or email hello@edgedashpro.com.",
         more: { slug: "sitemap/", label: "Site map" }
       };
     }

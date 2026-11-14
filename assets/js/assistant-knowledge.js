@@ -48,7 +48,7 @@ window.ETPKnowledge = [
   },
   {
     keywords: ["squawk", "audio", "aloud", "voice", "ad-free", "days", "7", "trial"],
-    answer: "Browser-based Squawk is not on the no-login pages. Free users must create a free account to access the 7-day Squawk trial. It can be switched on or off, with a volume control, and it reads chosen headlines and market alerts. After 7 days, Squawk requires the paid tier at $29.99/month or $259/year and is ad-free. That window is only for Squawk. The paid subscription has no free trial.",
+    answer: "Browser-based Squawk is not on the no-login pages. Free users must create a free account to access the 7-day Squawk trial. It can be switched on or off, with a volume control, and it reads chosen headlines. After 7 days, Squawk requires the paid tier at $29/month or $297/year and is ad-free. That window is only for Squawk. The paid subscription has no free trial.",
     more: { slug: "features/", label: "Features" }
   },
   {
@@ -67,13 +67,13 @@ window.ETPKnowledge = [
     more: { slug: "research/", label: "Research" }
   },
   {
-    keywords: ["price", "pricing", "cost", "pay", "payment", "stripe", "waitlist", "access", "checkout", "buy", "month", "year", "trial", "29", "259"],
-    answer: "Market, News, JAMSEC, Dilution, Stock Card, and Research are $0 and need no login. A free account unlocks browser-based Squawk for the first 7 days. After 7 days, Squawk requires Paid and is ad-free. Paid Monthly is $29.99/month and Paid Annual is $259/year. Continue to Paid Monthly and Continue to Paid Annual open https://app.edgedashpro.com/pricing, straight to Stripe Checkout. There is no free trial of the subscription. The paid launch holds 25 users. The waitlist button emails hello@edgedashpro.com.",
+    keywords: ["price", "pricing", "cost", "pay", "payment", "stripe", "waitlist", "access", "checkout", "buy", "month", "year", "trial", "29", "69", "297", "497"],
+    answer: "Market, News, JAMSEC, Dilution, Stock Card, and Research are $0 and need no login. A free account unlocks browser-based Squawk for the first 7 days. After 7 days, Squawk requires Paid and is ad-free. Paid is $29/month or $297/year for a limited time, regularly $69/month or $497/year. Continue to Paid Monthly and Continue to Paid Annual open https://app.edgedashpro.com/pricing, straight to Stripe Checkout. There is no free trial of the subscription. Questions about a plan go to hello@edgedashpro.com.",
     more: { slug: "access/", label: "Pricing" }
   },
   {
     keywords: ["paid", "unlock", "unlocks", "include", "includes", "subscription", "monthly", "annual", "account"],
-    answer: "Paid is $29.99/month or $259/year, scoped per user account. It unlocks the interactive filter controls, custom filtering, saved filter presets, the journal (a unified trade journal, a profit and loss calendar, and post-trade insight cards and reviews), and ad-free Squawk. Free visitors cannot change the locked presets. Ad-free Squawk is required after the first 7 days. There is no free trial of the subscription. A free account is only the 7-day Squawk trial. The paid launch holds 25 users.",
+    answer: "Paid is $29/month or $297/year for a limited time, regularly $69/month or $497/year, scoped per user account. It unlocks the interactive filter controls, custom filtering, saved filter presets, and ad-free Squawk. Free visitors cannot change the locked presets. Ad-free Squawk is required after the first 7 days. There is no free trial of the subscription. A free account is only the 7-day Squawk trial.",
     more: { slug: "access/", label: "Pricing" }
   },
   {
@@ -83,7 +83,7 @@ window.ETPKnowledge = [
   },
   {
     keywords: ["place", "trades", "trade for me", "brokerage", "buy for me", "sell for me"],
-    answer: "No. You use the desk yourself. EdgeDashPro does not buy or sell for you. It is not a brokerage. The journal records what you enter on the paid account.",
+    answer: "No. You use the desk yourself. EdgeDashPro does not buy or sell for you. It is not a brokerage.",
     more: { slug: "faq/", label: "FAQ" }
   },
   {
