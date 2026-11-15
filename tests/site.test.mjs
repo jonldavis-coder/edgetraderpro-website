@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, join, relative } from "node:path";
 import test from "node:test";
+import vm from "node:vm";
 
 const ROOT = join(import.meta.dirname, "..");
 const SKIP = new Set([".git", "node_modules", "tests"]);
@@ -259,6 +260,10 @@ test("sitemap lists public pages and omits noindex utility pages", () => {
   assert.doesNotMatch(xml, /\/practice\//);
   assert.doesNotMatch(xml, /\/charts\//);
   assert.doesNotMatch(xml, /\/rules\//);
+  const locs = xml.match(/<loc>/g) || [];
+  const mods = xml.match(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/g) || [];
+  assert.equal(locs.length, 12);
+  assert.equal(mods.length, locs.length);
   const robots = readFileSync(join(ROOT, "robots.txt"), "utf8");
   assert.match(robots, /Sitemap: https:\/\/edgedashpro\.com\/sitemap\.xml/);
   assert.match(robots, /Disallow: \/thank-you\//);
@@ -296,5 +301,138 @@ test("each HTML page includes the EdgeDashPro GA4 tag once", () => {
     const cfgHits = html.split("gtag('config', 'G-BWWCMCNW12')").length - 1;
     assert.equal(srcHits, 1, rel);
     assert.equal(cfgHits, 1, rel);
+    assert.doesNotMatch(html, /<script[^>]+src="https:\/\/www\.googletagmanager\.com\/gtag\/js/, rel);
+    assert.match(html, /requestIdleCallback\(loadAnalytics/, rel);
   }
+});
+
+test("deferred GA4 still installs the EdgeDashPro tag", () => {
+  const html = readFileSync(join(ROOT, "index.html"), "utf8");
+  const inline = html.match(/<script>\s*window\.dataLayer[\s\S]*?<\/script>/);
+  assert.ok(inline);
+  const created = [];
+  const listeners = {};
+  const context = {
+    created,
+    listeners,
+    document: {
+      readyState: "complete",
+      head: {
+        appendChild(node) {
+          created.push(node);
+        }
+      },
+      createElement() {
+        return { async: false, src: "" };
+      }
+    },
+    window: {
+      addEventListener(type, fn) {
+        (listeners[type] ||= []).push(fn);
+      }
+    }
+  };
+  context.window.document = context.document;
+  context.requestIdleCallback = (fn) => fn();
+  context.window.requestIdleCallback = context.requestIdleCallback;
+  const script = inline[0].replace(/^<script>/, "").replace(/<\/script>$/, "");
+  vm.runInNewContext(script, context);
+  assert.equal(created.length, 1);
+  assert.equal(created[0].async, true);
+  assert.equal(created[0].src, "https://www.googletagmanager.com/gtag/js?id=G-BWWCMCNW12");
+  const commands = context.window.dataLayer.map((entry) => entry[0]);
+  assert.ok(commands.includes("config"));
+});
+
+test("every page has a unique title and a 120 to 160 character description", () => {
+  const htmlFiles = files.filter((file) => file.endsWith(".html"));
+  const titles = [];
+  const descriptions = [];
+  for (const file of htmlFiles) {
+    const html = readFileSync(file, "utf8");
+    const rel = relative(ROOT, file);
+    const title = html.match(/<title>([^<]+)<\/title>/)[1];
+    const description = html.match(/<meta name="description" content="([^"]*)">/)[1];
+    const canonical = html.match(/<link rel="canonical" href="([^"]+)">/)[1];
+    titles.push(title);
+    descriptions.push(description);
+    assert.ok(title.length > 0, rel);
+    assert.ok(description.length >= 120 && description.length <= 160, `${rel} ${description.length}`);
+    assert.match(canonical, /^https:\/\/edgedashpro\.com\//, rel);
+    assert.match(html, /property="og:title"/, rel);
+    assert.match(html, /property="og:description"/, rel);
+    assert.match(html, /property="og:url"/, rel);
+    assert.match(html, /name="twitter:card"/, rel);
+    assert.match(html, /name="twitter:title"/, rel);
+    assert.match(html, /name="twitter:description"/, rel);
+    assert.match(html, /name="twitter:image"/, rel);
+    const headMeta = [...html.matchAll(/<(?:title|meta)\b[^>]*>/g)].map((match) => match[0]).join("\n");
+    assert.doesNotMatch(headMeta, /Edge Trader Pro/, rel);
+    assert.doesNotMatch(headMeta, /\bETP\b/, rel);
+    assert.doesNotMatch(headMeta, /edgetraderpro\.com/i, rel);
+  }
+  assert.equal(new Set(titles).size, titles.length);
+  assert.equal(new Set(descriptions).size, descriptions.length);
+});
+
+test("structured data offers keep the live paid prices", () => {
+  for (const file of ["index.html", "access/index.html"]) {
+    const html = readFileSync(join(ROOT, file), "utf8");
+    const blocks = [...html.matchAll(/<script type="application\/ld\+json">([^<]+)<\/script>/g)].map((match) =>
+      JSON.parse(match[1])
+    );
+    const prices = [];
+    for (const block of blocks) {
+      for (const node of block["@graph"] || []) {
+        for (const offer of node.offers || []) {
+          prices.push(String(offer.price));
+          if (offer.priceSpecification) prices.push(String(offer.priceSpecification.price));
+        }
+      }
+    }
+    assert.ok(prices.includes("29"), file);
+    assert.ok(prices.includes("297"), file);
+    for (const price of prices) assert.ok(["0", "29", "297"].includes(price), `${file} ${price}`);
+  }
+  const home = JSON.parse(
+    readFileSync(join(ROOT, "index.html"), "utf8").match(
+      /<script type="application\/ld\+json">([^<]+)<\/script>/
+    )[1]
+  );
+  const types = home["@graph"].map((node) => node["@type"]);
+  assert.ok(types.includes("Organization"));
+  assert.ok(types.includes("WebSite"));
+  assert.ok(types.includes("SoftwareApplication"));
+  const monthly = home["@graph"]
+    .find((node) => node["@type"] === "SoftwareApplication")
+    .offers.find((offer) => offer.price === "29");
+  const annual = home["@graph"]
+    .find((node) => node["@type"] === "SoftwareApplication")
+    .offers.find((offer) => offer.price === "297");
+  assert.equal(monthly.priceSpecification.unitCode, "MON");
+  assert.equal(annual.priceSpecification.unitCode, "ANN");
+  assert.equal(monthly.priceSpecification.price, "29");
+  assert.equal(annual.priceSpecification.price, "297");
+});
+
+test("the homepage lockup is resized, modern, sized, and lazy", () => {
+  const html = readFileSync(join(ROOT, "index.html"), "utf8");
+  assert.match(html, /type="image\/avif"/);
+  assert.match(html, /type="image\/webp"/);
+  assert.match(html, /<img[^>]*src="assets\/img\/lockup\.png"[^>]*>/);
+  const img = html.match(/<img[^>]*src="assets\/img\/lockup\.png"[^>]*>/)[0];
+  assert.match(img, /width="660"/);
+  assert.match(img, /height="234"/);
+  assert.match(img, /loading="lazy"/);
+  assert.match(img, /alt="EdgeDashPro wordmark on navy/);
+  assert.equal(existsSync(join(ROOT, "assets/img/lockup.avif")), true);
+  assert.equal(existsSync(join(ROOT, "assets/img/lockup.webp")), true);
+  assert.equal(existsSync(join(ROOT, "assets/img/lockup.png")), true);
+});
+
+test("journal is linked from the home page and the footer", () => {
+  const home = readFileSync(join(ROOT, "index.html"), "utf8");
+  assert.match(home, /href="journal\/"/);
+  const nested = readFileSync(join(ROOT, "features/index.html"), "utf8");
+  assert.match(nested, /href="\.\.\/journal\/"/);
 });

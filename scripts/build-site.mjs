@@ -18,6 +18,54 @@ const DATA =
   "This site does not describe the data as universally connected or real-time. A delayed quote can wear a delayed tag. A cached value can wear a cached tag. A field with no feed stays n/a. A panel without a connected feed stays grey, and a feed that is failing stays marked that way.";
 const OFFER =
   "Paid is $29/month or $297/year for a limited time, regularly $69/month or $497/year. There is no free trial of the subscription.";
+const LASTMOD = "2026-11-15";
+const OG_ALT = "EdgeDashPro wordmark on navy, with the tagline Your rules. Your data. Your desk.";
+
+function subscriptionOffer(name, price, unitCode, unitText, description) {
+  return {
+    "@type": "Offer",
+    name,
+    price,
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+    url: CHECKOUT,
+    description,
+    priceSpecification: {
+      "@type": "UnitPriceSpecification",
+      price,
+      priceCurrency: "USD",
+      unitText,
+      unitCode,
+      billingDuration: 1
+    }
+  };
+}
+
+const OFFERS = [
+  {
+    "@type": "Offer",
+    name: "Free public",
+    price: "0",
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+    url: BASE + "/access/",
+    description: "Ad-supported. No login. Read-only."
+  },
+  subscriptionOffer(
+    "Paid Monthly",
+    "29",
+    "MON",
+    "MONTH",
+    "Limited-time price. Regularly $69 a month. No free trial."
+  ),
+  subscriptionOffer(
+    "Paid Annual",
+    "297",
+    "ANN",
+    "YEAR",
+    "Limited-time price. Regularly $497 a year. No free trial."
+  )
+];
 
 const NAV = [
   ["features", "Features"],
@@ -33,6 +81,7 @@ const FOOTER_GROUPS = [
     [
       ["features", "Features"],
       ["market", "Market"],
+      ["journal", "Journal"],
       ["research", "Research"],
       ["access", "Pricing"]
     ]
@@ -213,6 +262,7 @@ function layout(page) {
     }
   ];
   if (!page.slug && page.file !== "404.html") {
+    graph[0].mainEntity = { "@id": BASE + "/#app" };
     graph.push(
       {
         "@type": "WebSite",
@@ -230,39 +280,46 @@ function layout(page) {
         url: BASE + "/",
         email: "hello@edgedashpro.com",
         slogan: "Your rules. Your data. Your desk.",
-        logo: BASE + "/assets/img/logo.svg"
+        logo: {
+          "@type": "ImageObject",
+          url: BASE + "/assets/img/apple-touch-icon.png",
+          width: 180,
+          height: 180,
+          caption: "EdgeDashPro"
+        },
+        image: {
+          "@type": "ImageObject",
+          url: BASE + "/assets/img/og.png",
+          width: 1200,
+          height: 630
+        },
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "customer support",
+          email: "hello@edgedashpro.com",
+          url: BASE + "/contact/",
+          availableLanguage: "English"
+        }
       },
       {
         "@type": "SoftwareApplication",
+        "@id": BASE + "/#app",
         name: "EdgeDashPro",
         applicationCategory: "FinanceApplication",
         operatingSystem: "Web",
         url: BASE + "/",
+        image: BASE + "/assets/img/og.png",
+        provider: { "@id": BASE + "/#org" },
         description:
           "Free public pages need no login and stay on locked presets: $1–$50, float under 40M, and Price Spike Up or Price Spike Down at 5% on Signals. A free account unlocks browser-based Squawk for the first 7 days. Paid is $29 a month or $297 a year for a limited time, with no free trial of the subscription, and adds interactive filter controls, saved filter presets, and ad-free Squawk. Not investment advice.",
-        offers: [
-          {
-            "@type": "Offer",
-            name: "Free public",
-            price: "0",
-            priceCurrency: "USD",
-            description: "Ad-supported. No login. Read-only."
-          },
-          {
-            "@type": "Offer",
-            name: "Paid Monthly",
-            price: "29",
-            priceCurrency: "USD",
-            description: "Limited-time price. Regularly $69 a month. No free trial."
-          },
-          {
-            "@type": "Offer",
-            name: "Paid Annual",
-            price: "297",
-            priceCurrency: "USD",
-            description: "Limited-time price. Regularly $497 a year. No free trial."
-          }
-        ]
+        featureList: [
+          "Free public Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research",
+          "Server-side lock to $1–$50 and float under 40M",
+          "Signals locked to Price Spike Up and Price Spike Down at 5%",
+          "Browser-based Squawk for the first 7 days on a free account",
+          "Paid interactive filter controls, saved filter presets, and ad-free Squawk"
+        ],
+        offers: OFFERS
       }
     );
   } else if (page.file !== "404.html") {
@@ -295,24 +352,24 @@ function layout(page) {
   <meta property="og:description" content="${page.description}">
   <meta property="og:url" content="${url}">
   <meta property="og:image" content="${BASE}/assets/img/og.png">
-  <meta property="og:image:alt" content="EdgeDashPro wordmark on navy, with the tagline Your rules. Your data. Your desk.">
+  <meta property="og:image:alt" content="${OG_ALT}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${page.title}">
   <meta name="twitter:description" content="${page.description}">
   <meta name="twitter:image" content="${BASE}/assets/img/og.png">
+  <meta name="twitter:image:alt" content="${OG_ALT}">
   <link rel="icon" href="${pre}assets/img/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="${pre}assets/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="${pre}assets/img/apple-touch-icon.png" sizes="180x180">
   <link rel="manifest" href="${pre}site.webmanifest">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="${BASE}/sitemap.xml">
   <link rel="stylesheet" href="${pre}assets/css/site.css">
   <script type="application/ld+json">${json}</script>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=${GA_ID}"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '${GA_ID}');
-  </script>
+  <script defer src="${pre}assets/js/checkout-config.js"></script>
+  <script defer src="${pre}assets/js/assistant-knowledge.js"></script>
+  <script defer src="${pre}assets/js/site.js"></script>
 </head>
 <body data-root="${pre}">
   <a class="skip" href="#content">Skip to content</a>
@@ -375,9 +432,32 @@ function layout(page) {
       </div>
     </div>
   </footer>
-  <script src="${pre}assets/js/checkout-config.js"></script>
-  <script src="${pre}assets/js/assistant-knowledge.js"></script>
-  <script src="${pre}assets/js/site.js"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){window.dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${GA_ID}');
+    (function () {
+      var started = false;
+      function loadAnalytics() {
+        if (started) return;
+        started = true;
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=${GA_ID}';
+        document.head.appendChild(script);
+      }
+      function scheduleAnalytics() {
+        if ('requestIdleCallback' in window) requestIdleCallback(loadAnalytics, { timeout: 4000 });
+        else setTimeout(loadAnalytics, 4000);
+      }
+      if (document.readyState === 'complete') scheduleAnalytics();
+      else window.addEventListener('load', scheduleAnalytics, { once: true });
+      ['pointerdown', 'keydown', 'touchstart'].forEach(function (eventName) {
+        window.addEventListener(eventName, loadAnalytics, { once: true, passive: true });
+      });
+    })();
+  </script>
 </body>
 </html>
 `;
@@ -463,7 +543,7 @@ pages.push({
         </div>
         <div class="band">
           <h2>What Paid adds</h2>
-          <p>Paid unlocks interactive filter controls, custom filtering, and saved filter presets, plus ad-free Squawk after the first 7 days. All of that is scoped per user account. <a href="access/">See pricing</a></p>
+          <p>Paid unlocks interactive filter controls, custom filtering, and saved filter presets, plus ad-free Squawk after the first 7 days. All of that is scoped per user account, including the <a href="journal/">journal</a>. <a href="access/">See pricing</a></p>
         </div>
       </div>
     </section>
@@ -474,6 +554,13 @@ pages.push({
         <p class="mark-note">This site does not publish performance.</p>
       </div>
     </section>
+    <figure class="brand-figure">
+      <picture>
+        <source srcset="assets/img/lockup.avif" type="image/avif">
+        <source srcset="assets/img/lockup.webp" type="image/webp">
+        <img src="assets/img/lockup.png" width="660" height="234" alt="${OG_ALT}" loading="lazy" decoding="async">
+      </picture>
+    </figure>
   </div>`
 });
 
@@ -483,7 +570,7 @@ pages.push({
   crumb: "Features",
   title: "Features — EdgeDashPro",
   description:
-    "Free public pages need no login: Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research. Signals is locked to a 5% price spike on $1–$50 names with float under 40M. Custom filters are paid.",
+    "Free EdgeDashPro pages need no login: Market, News, JAMSEC, Signals, Dilution, Stock Card, and Research. Custom filters and ad-free Squawk are paid.",
   body: `<div class="wrap">
     <header class="page-hero">
       <p class="kicker">Product</p>
@@ -557,7 +644,7 @@ pages.push({
   crumb: "Journal",
   title: "Trade Journal — EdgeDashPro",
   description:
-    "The EdgeDashPro journal is paid: a unified trade journal, a profit and loss calendar, and post-trade insight cards, scoped to the user account. Not investment advice.",
+    "The EdgeDashPro journal is paid: a unified trade journal, a profit and loss calendar, and post-trade insight cards, scoped to the user account.",
   body: `<div class="wrap">
     <header class="page-hero">
       <p class="kicker">Paid</p>
@@ -623,29 +710,7 @@ pages.push({
       name: "EdgeDashPro",
       description: "Free public tier and paid tier. Not investment advice.",
       brand: { "@type": "Brand", name: "EdgeDashPro" },
-      offers: [
-        {
-          "@type": "Offer",
-          name: "Free public",
-          price: "0",
-          priceCurrency: "USD",
-          url: BASE + "/access/"
-        },
-        {
-          "@type": "Offer",
-          name: "Paid Monthly",
-          price: "29",
-          priceCurrency: "USD",
-          url: CHECKOUT
-        },
-        {
-          "@type": "Offer",
-          name: "Paid Annual",
-          price: "297",
-          priceCurrency: "USD",
-          url: CHECKOUT
-        }
-      ]
+      offers: OFFERS
     }
   ],
   body: `<div class="wrap">
@@ -673,7 +738,7 @@ pages.push({
   crumb: "FAQ",
   title: "FAQ — EdgeDashPro",
   description:
-    "Answers about EdgeDashPro: the free public tier, the paid tier, locked filters, data feeds, and the risk disclaimer.",
+    "Answers about EdgeDashPro: the free public tier, paid plans, the 7-day Squawk trial, locked filters, data feeds, and the risk disclaimer.",
   extraGraph: [
     {
       "@type": "FAQPage",
@@ -700,7 +765,7 @@ pages.push({
   crumb: "Support",
   title: "Support — EdgeDashPro",
   description:
-    "Contact EdgeDashPro support at hello@edgedashpro.com. Do not send account numbers, passwords, or API keys.",
+    "Email EdgeDashPro support at hello@edgedashpro.com. Say what you expected and what happened. Do not send account numbers, passwords, or API keys.",
   body: `<div class="wrap prose">
     <header class="page-hero">
       <p class="kicker">Support</p>
@@ -726,7 +791,7 @@ pages.push({
   crumb: "Contact",
   title: "Contact — EdgeDashPro",
   description:
-    "Contact EdgeDashPro at hello@edgedashpro.com. The form opens your email app. Not investment advice.",
+    "Contact EdgeDashPro at hello@edgedashpro.com. The form opens your email app, and this website does not store the message. Not investment advice.",
   extraGraph: [
     {
       "@type": "ContactPage",
@@ -832,7 +897,8 @@ pages.push({
   crumb: "Thank you",
   robots: "noindex, nofollow",
   title: "Thank you — EdgeDashPro",
-  description: "Return page for EdgeDashPro checkout. Paid has no free trial. Noindex.",
+  description:
+    "Thank you for visiting EdgeDashPro checkout. Paid is $29 a month or $297 a year for a limited time, with no free trial. This page is noindex.",
   body: `<div class="wrap prose">
     <header class="page-hero">
       <h1>Thank you</h1>
@@ -848,7 +914,8 @@ pages.push({
   crumb: "Checkout canceled",
   robots: "noindex, nofollow",
   title: "Checkout canceled — EdgeDashPro",
-  description: "Checkout was canceled. You have not been charged by this EdgeDashPro website. No free trial was started. Noindex.",
+  description:
+    "Checkout was canceled. You have not been charged by this EdgeDashPro website, and no free trial was started. You can return to pricing.",
   body: `<div class="wrap prose">
     <header class="page-hero">
       <h1>Checkout canceled</h1>
@@ -863,7 +930,8 @@ pages.push({
   slug: "sitemap",
   crumb: "Site map",
   title: "Site map — EdgeDashPro",
-  description: "Every public page on the EdgeDashPro marketing site, including draft legal pages and unindexed checkout pages.",
+  description:
+    "Every public page on the EdgeDashPro marketing site: features, market, journal, research, pricing, FAQ, support, contact, and draft legal pages.",
   body: `<div class="wrap">
     <header class="page-hero">
       <h1>Site map</h1>
@@ -893,7 +961,8 @@ pages.push({
   crumb: "Not found",
   robots: "noindex, nofollow",
   title: "Page not found — EdgeDashPro",
-  description: "That page is not on the EdgeDashPro website. Use the site map to find a page.",
+  description:
+    "That address is not a page on the EdgeDashPro website. Use the site map to find features, pricing, support, contact, or the draft legal pages.",
   body: `<div class="wrap prose">
     <header class="page-hero">
       <h1>Page not found</h1>
@@ -902,7 +971,22 @@ pages.push({
   </div>`
 });
 
+const titles = new Set();
+const descriptions = new Set();
 for (const page of pages) {
+  const length = Array.from(page.description).length;
+  if (length < 120 || length > 160) {
+    throw new Error(`${page.file} description is ${length} characters`);
+  }
+  if (titles.has(page.title)) throw new Error(`Duplicate title: ${page.title}`);
+  if (descriptions.has(page.description)) throw new Error(`Duplicate description on ${page.file}`);
+  titles.add(page.title);
+  descriptions.add(page.description);
+  const retiredName = ["Edge", "Trader Pro"].join(" ");
+  const retiredHost = "edgetrader" + "pro.com";
+  if (new RegExp(`${retiredName}|\\bETP\\b|${retiredHost}`, "i").test(`${page.title}\n${page.description}`)) {
+    throw new Error(`${page.file} meta still uses old branding`);
+  }
   const target = join(ROOT, page.file);
   mkdirSync(dirname(target), { recursive: true });
   writeFileSync(target, layout(page));
@@ -910,7 +994,10 @@ for (const page of pages) {
 
 const indexed = pages.filter((page) => page.file !== "404.html" && !String(page.robots || "").includes("noindex"));
 const urls = indexed
-  .map((page) => `  <url><loc>${canonical(page.slug, page.file)}</loc></url>`)
+  .map(
+    (page) =>
+      `  <url>\n    <loc>${canonical(page.slug, page.file)}</loc>\n    <lastmod>${LASTMOD}</lastmod>\n  </url>`
+  )
   .join("\n");
 writeFileSync(
   join(ROOT, "sitemap.xml"),

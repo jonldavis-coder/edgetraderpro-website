@@ -762,6 +762,19 @@ main {
   font-size: 0.9375rem;
 }
 
+.brand-figure {
+  margin: var(--space-8) 0 0;
+  max-width: 36rem;
+}
+
+.brand-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+
 .footer-heading {
   margin: 0 0 0.65rem;
   font-size: 0.75rem;
