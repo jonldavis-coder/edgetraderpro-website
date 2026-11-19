@@ -266,8 +266,8 @@ test("sitemap lists public pages and omits noindex utility pages", () => {
   assert.equal(mods.length, locs.length);
   const robots = readFileSync(join(ROOT, "robots.txt"), "utf8");
   assert.match(robots, /Sitemap: https:\/\/edgedashpro\.com\/sitemap\.xml/);
-  assert.match(robots, /Disallow: \/thank-you\//);
-  assert.match(robots, /Disallow: \/checkout-canceled\//);
+  // Do not block noindex pages: Google must crawl them to see the noindex tag.
+  assert.doesNotMatch(robots, /Disallow/);
 });
 
 test("published copy uses EdgeDashPro and hello@edgedashpro.com", () => {

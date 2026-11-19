@@ -1,7 +1,4 @@
 User-agent: *
 Allow: /
 
-Disallow: /thank-you/
-Disallow: /checkout-canceled/
-
 Sitemap: https://edgedashpro.com/sitemap.xml

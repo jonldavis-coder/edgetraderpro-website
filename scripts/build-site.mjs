@@ -725,7 +725,6 @@ pages.push({
         <h2>Questions before you subscribe</h2>
         <p>Email hello@edgedashpro.com if you have a question about a plan. This site does not promise a response time. You are not charged by this marketing website. Do not include account numbers, passwords, or API keys.</p>
         <p><a class="btn btn-ghost" data-checkout="waitlist" href="${MAILTO}">Email hello@edgedashpro.com</a></p>
-        <p class="fine"><a href="../checkout-canceled/">Checkout canceled</a> · <a href="../thank-you/">Thank you</a></p>
       </div>
     </section>
     <p class="legal-note">${DISCLAIMER}</p>
@@ -949,8 +948,6 @@ pages.push({
       <li><a href="../contact/">Contact</a> — a form that opens email.</li>
       <li><a href="../privacy/">Privacy (draft)</a></li>
       <li><a href="../terms/">Terms (draft)</a></li>
-      <li><a href="../thank-you/">Thank you</a> — not indexed.</li>
-      <li><a href="../checkout-canceled/">Checkout canceled</a> — not indexed.</li>
     </ul>
   </div>`
 });
@@ -1006,7 +1003,7 @@ writeFileSync(
 
 writeFileSync(
   join(ROOT, "robots.txt"),
-  `User-agent: *\nAllow: /\n\nDisallow: /thank-you/\nDisallow: /checkout-canceled/\n\nSitemap: ${BASE}/sitemap.xml\n`
+  `User-agent: *\nAllow: /\n\nSitemap: ${BASE}/sitemap.xml\n`
 );
 
 writeFileSync(join(ROOT, ".nojekyll"), "");
